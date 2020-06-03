@@ -3,7 +3,7 @@ const initState = {
 };
 
 const tutorReducer = (state = initState, action) => {
-
-}
+  return state;
+};
 
 export default tutorReducer;
