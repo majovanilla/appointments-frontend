@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import setToken from '../../actions/authActions';
 
-export class Signup extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
 
@@ -20,8 +21,6 @@ export class Signup extends Component {
   }
 
   setStateFromResponse(response) {
-    const { setToken } = this.props;
-    setToken(response);
     const { message } = response.data;
     this.setState({
       message,
@@ -46,6 +45,8 @@ export class Signup extends Component {
       password,
     }).then(response => {
       this.setStateFromResponse(response);
+      const { setToken } = this.props;
+      setToken(response);
     }).catch(error => {
       console.log('error', error);
     });
@@ -81,5 +82,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setToken(response.data.auth_token));
   },
 });
+
+Signup.propTypes = {
+  setToken: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

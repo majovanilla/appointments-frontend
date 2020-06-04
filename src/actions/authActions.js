@@ -4,3 +4,9 @@ export default function setToken(authToken) {
     authToken,
   };
 }
+// const getToken = authToken => ({
+//   type: 'GET_TOKEN',
+//   authToken,
+// });
+
+// export { setToken, getToken };
