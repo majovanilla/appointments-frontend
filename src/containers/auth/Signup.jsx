@@ -48,7 +48,7 @@ class Signup extends Component {
       const { setToken } = this.props;
       setToken(response);
     }).catch(error => {
-      console.log('error', error);
+      this.setStateFromResponse(error);
     });
     event.preventDefault();
   }
