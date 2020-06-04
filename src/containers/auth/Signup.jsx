@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import setToken from '../../actions/authActions';
 
-export default class Signup extends Component {
+export class Signup extends Component {
   constructor(props) {
     super(props);
 
@@ -18,11 +20,12 @@ export default class Signup extends Component {
   }
 
   setStateFromResponse(response) {
+    const { setToken } = this.props;
+    setToken(response);
     const { message } = response.data;
     this.setState({
       message,
     });
-    console.log(response.data);
   }
 
   handleChange(event) {
@@ -35,6 +38,7 @@ export default class Signup extends Component {
     const {
       name, email, password,
     } = this.state;
+
 
     axios.post('http://localhost:3000/signup', {
       name,
@@ -67,3 +71,15 @@ export default class Signup extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  authToken: state.auth.authToken,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setToken: response => {
+    dispatch(setToken(response.data.auth_token));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
