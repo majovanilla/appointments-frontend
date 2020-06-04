@@ -14,6 +14,15 @@ export default class Signup extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setStateFromResponse = this.setStateFromResponse.bind(this);
+  }
+
+  setStateFromResponse(response) {
+    const { message } = response.data;
+    this.setState({
+      message,
+    });
+    console.log(response.data);
   }
 
   handleChange(event) {
@@ -32,7 +41,7 @@ export default class Signup extends Component {
       email,
       password,
     }).then(response => {
-      console.log('response', response);
+      this.setStateFromResponse(response);
     }).catch(error => {
       console.log('error', error);
     });
