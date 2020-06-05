@@ -9,10 +9,14 @@
   color:$font-color;
 }
 
+.hambugerDiv {
+  margin: 30px;
+  z-index: 1;
+}
+
 .hambugerButton {
   width: 20px;
   height: 20px;
-  margin: 30px;
 }
 
 .navbar {
@@ -20,6 +24,7 @@
 }
 
 .navToggle {
+  display: none;
   justify-content: space-around;
   background: $gray-color;
   position: absolute;

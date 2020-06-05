@@ -11,7 +11,7 @@ import vimeo from '../img/vimeo.png';
 export default function Navbar() {
   return (
     <div className={navClasses.navbar}>
-      <div>
+      <div className={navClasses.hambugerDiv}>
         <img src={hambBlack} alt="toggle menu icon" className={navClasses.hambugerButton} />
       </div>
       <div className={navClasses.navToggle}>
