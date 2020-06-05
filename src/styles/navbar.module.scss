@@ -1,0 +1,50 @@
+@import 'variables';
+
+.navbar,
+.navMenu,
+.navToggle {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  color:$font-color;
+}
+
+.hambugerButton {
+  width: 20px;
+  height: 20px;
+  margin: 30px;
+}
+
+.navbar {
+  width: 20%;
+}
+
+.navToggle {
+  justify-content: space-around;
+  background: $gray-color;
+  position: absolute;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+.navMenu {
+ 
+}
+
+.navItem {
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.socialDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.socialIcon {
+  width: 20px;
+  &:hover {
+    opacity: 60%;
+  }
+}
