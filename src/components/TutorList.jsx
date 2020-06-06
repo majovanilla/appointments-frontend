@@ -7,6 +7,9 @@ import fb from '../img/fb.png';
 export default function TutorList() {
   return (
     <div className={tutorClasses.mainDiv}>
+      <div className={tutorClasses.prevButton}>
+        <span>&gt;</span>
+      </div>
       <div className={tutorClasses.title}>
         <h1 className={tutorClasses.mainTitle}>Best Tutors</h1>
         <h2 className={tutorClasses.subTitle}>Choose your teacher</h2>
@@ -14,7 +17,7 @@ export default function TutorList() {
           <p>************</p>
         </div>
       </div>
-      <div className={tutorClasses.separator} />
+      {/* <div className={tutorClasses.separator} /> */}
       {tutors.map(tutor => (
         <div className={tutorClasses.tutorDiv} key={tutor.id}>
           <img className={tutorClasses.tutorPic} src={tutor.img} alt="Tutor profile" />
@@ -33,7 +36,7 @@ export default function TutorList() {
         </div>
       ))}
       <div className={tutorClasses.nextButton}>
-        >
+        <span>&gt;</span>
       </div>
     </div>
   );

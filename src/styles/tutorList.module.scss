@@ -28,6 +28,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 10px;
+  grid-row: tutorDiv;
 }
 
 .title {
@@ -89,14 +90,28 @@
   color: $dark-gray-color;
 }
 
-.nextButton {
-  grid-column: main;
-  background: #97bf10;
+.nextButton,
+.prevButton {
   align-self: center;
   padding: 10px 20px;
-  border-radius: 120px 0 0 120px;
   text-align: center;
   color: white;
   font-weight: 700;
   font-size: 2.5rem;
+}
+
+.nextButton {
+  grid-row: tutorDiv;
+  grid-column: space2;
+  background: #97bf10;
+  border-radius: 120px 0 0 120px;
+  margin-left: 30px;
+}
+
+.prevButton {
+  grid-row: tutorDiv;
+  grid-column: space1;
+  background: $gray-color;
+  border-radius: 0 120px 120px 0;
+  margin-right: 30px;
 }
