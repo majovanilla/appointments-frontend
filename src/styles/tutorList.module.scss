@@ -4,7 +4,7 @@
   font-family: 'Baloo Paaji 2', cursive;
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
-  grid-template-rows: [title] 15% [space] 10% [tutorDiv] 80%;
+  grid-template-rows: [title] 15% [tutorDiv] 65%;
   min-height: 100%;
   margin: auto;
 }
@@ -24,7 +24,6 @@
 .tutorInfo {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
   margin: 0 10px;
   grid-row: tutorDiv;
@@ -49,6 +48,7 @@
 
 .tutorPic {
   max-width: 80%;
+  margin-bottom: 20px;
 }
 
 .tutorInfo {
@@ -84,6 +84,7 @@
   text-align: center;
   font-size: 0.9rem;
   color: silver;
+  margin-bottom: 20px;
 }
 
 .nextButton,

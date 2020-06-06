@@ -17,7 +17,6 @@ export default function TutorList() {
           <p>************</p>
         </div>
       </div>
-      {/* <div className={tutorClasses.separator} /> */}
       {tutors.map(tutor => (
         <div className={tutorClasses.tutorDiv} key={tutor.id}>
           <img className={tutorClasses.tutorPic} src={tutor.img} alt="Tutor profile" />
