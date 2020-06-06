@@ -1,0 +1,102 @@
+@import 'variables';
+
+.mainDiv {
+  font-family: 'Baloo Paaji 2', cursive;
+  display: grid;
+  grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
+  grid-template-rows: [title] 15% [tutorDiv] 60% [space1] auto;
+  height: 100%;
+  min-height: 75vh;
+  margin: auto;
+}
+
+.separator {
+  grid-column: space1;
+}
+
+.divisor {
+  color: $dark-gray-color;
+  padding: 20px 0;
+  font-size: 0.8rem;
+  opacity: 40%;
+}
+
+.tutorDiv,
+.tutorInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.title {
+  text-align: center;
+  grid-column: tutor2;
+}
+
+.mainTitle {
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.subTitle {
+  color: $dark-gray-color;
+}
+
+.tutorPic {
+  width: 100%;
+}
+
+.tutorInfo {
+  height: 25%;
+  padding: 20px 0;
+  align-content: space-around;
+}
+
+.tutorName {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.socialDiv {
+  grid-row: social;
+  display: flex;
+  justify-content: center;
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  &:hover {
+    opacity: 60%;
+  }
+}
+
+.about {
+	font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  text-overflow: inherit;
+  height: 4.8rem;
+  line-height: 1.6rem;
+  text-align: center;
+  font-size: 0.9reml;
+  color: $dark-gray-color;
+}
+
+.nextButton {
+  grid-column: main;
+  background: #97bf10;
+  align-self: center;
+  padding: 10px 20px;
+  border-radius: 120px 0 0 120px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
