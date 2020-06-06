@@ -8,7 +8,7 @@ export default function TutorList() {
   return (
     <div className={tutorClasses.mainDiv}>
       <div className={tutorClasses.prevButton}>
-        <span>&gt;</span>
+        <span>&lt;</span>
       </div>
       <div className={tutorClasses.title}>
         <h1 className={tutorClasses.mainTitle}>Best Tutors</h1>

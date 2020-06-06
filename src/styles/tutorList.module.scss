@@ -1,7 +1,6 @@
 @import 'variables';
 
 .mainDiv {
-  font-family: 'Baloo Paaji 2', cursive;
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
   grid-template-rows: [title] 15% [tutorDiv] 65%;
@@ -35,11 +34,13 @@
 }
 
 .mainTitle {
+  font-family: 'Baloo Paaji 2', cursive;
   font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 2px;
+  font-size: 2.3rem;
+  letter-spacing: 1.5px;
   text-align: center;
   margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
 .subTitle {
@@ -57,6 +58,7 @@
 }
 
 .tutorName {
+  font-family: 'Baloo Paaji 2', cursive;
   font-weight: 700;
   text-align: center;
   font-size: 1.3rem;
@@ -72,8 +74,9 @@
   width: 20px;
   height: 20px;
   margin: 0 10px;
+  opacity: 40%;
   &:hover {
-    opacity: 60%;
+    opacity: 30%;
   }
 }
 
@@ -100,7 +103,7 @@
 .nextButton {
   grid-row: tutorDiv;
   grid-column: space2;
-  background: #97bf10;
+  background: $green-color;
   border-radius: 120px 0 0 120px;
   margin-left: 30px;
 }
