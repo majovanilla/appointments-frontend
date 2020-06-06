@@ -25,7 +25,7 @@
 
 .navToggle {
   display: none;
-  justify-content: space-around;
+  justify-content: space-between;
   background: $gray-color;
   position: absolute;
   padding: 30px;
@@ -33,11 +33,11 @@
 }
 
 .navMenu {
- 
+  margin-top: 100px;
 }
 
 .navItem {
-  padding: 10px 0;
+  padding: 20px 0;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -45,6 +45,8 @@
 .socialDiv {
   display: flex;
   justify-content: space-between;
+  padding: 20px 0;
+  margin-bottom: 50px;
 }
 
 .socialIcon {

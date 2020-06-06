@@ -19,7 +19,7 @@ export default function Navbar() {
           <li className={navClasses.navItem}>Home</li>
           <li className={navClasses.navItem}>Login</li>
           <li className={navClasses.navItem}>Sign Up</li>
-          <li className={navClasses.navItem}>My Appointments</li>
+          <li className={navClasses.navItem}>Appointments</li>
         </ul>
         <div className={navClasses.socialDiv}>
           <img className={navClasses.socialIcon} src={twitter} alt="twitter logo" />
