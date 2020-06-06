@@ -4,9 +4,8 @@
   font-family: 'Baloo Paaji 2', cursive;
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
-  grid-template-rows: [title] 15% [tutorDiv] 60% [space1] auto;
-  height: 100%;
-  min-height: 75vh;
+  grid-template-rows: [title] 15% [space] 10% [tutorDiv] 80%;
+  min-height: 100%;
   margin: auto;
 }
 
@@ -25,7 +24,7 @@
 .tutorInfo {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin: 0 10px;
   grid-row: tutorDiv;
@@ -49,12 +48,11 @@
 }
 
 .tutorPic {
-  width: 100%;
+  max-width: 80%;
 }
 
 .tutorInfo {
   height: 25%;
-  padding: 20px 0;
   align-content: space-around;
 }
 
@@ -80,14 +78,12 @@
 }
 
 .about {
-	font-family: 'Open Sans', sans-serif;
   overflow: hidden;
-  text-overflow: inherit;
-  height: 4.8rem;
-  line-height: 1.6rem;
+  height: 12.8rem;
+  line-height: 1rem;
   text-align: center;
-  font-size: 0.9reml;
-  color: $dark-gray-color;
+  font-size: 0.9rem;
+  color: silver;
 }
 
 .nextButton,
