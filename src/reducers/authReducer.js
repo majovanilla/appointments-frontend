@@ -1,6 +1,6 @@
 const initState = {
   authToken: '',
-  currentUser: '',
+  loggedIn: false,
 };
 
 const authReducer = (state = initState, action) => {
@@ -14,6 +14,11 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         currentUser: action.currentUser,
+      };
+    case 'LOGGED_IN':
+      return {
+        ...state,
+        loggedIn: action.loggedIn,
       };
     default:
       return state;

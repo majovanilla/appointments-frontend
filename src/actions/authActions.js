@@ -17,4 +17,11 @@ function setCurrentUser(currentUser) {
   };
 }
 
-export { setToken, setCurrentUser };
+function loggedIn(status) {
+  return {
+    type: 'LOGGED_IN',
+    loggedIn: status,
+  };
+}
+
+export { setToken, setCurrentUser, loggedIn };
