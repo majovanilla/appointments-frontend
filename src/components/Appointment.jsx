@@ -19,7 +19,7 @@ export default function Appointment(props) {
         <p>If you wish to cancel your appointment, please do so in advance</p>
       </div>
       <div className={appClasses.buttons}>
-        <select name="location" id="place-selector">
+        <select className={appClasses.input} name="location" id="place-selector">
           <option value="london">London</option>
           <option value="new york">New York</option>
           <option value="mexico city">Mexico City</option>
@@ -27,13 +27,14 @@ export default function Appointment(props) {
         </select>
         <div className={appClasses.datePickerDiv}>
           <DatePicker
-            className={appClasses.datePicker}
+            className={`${appClasses.datePicker} ${appClasses.input} `}
             selected={startDate}
             onChange={date => setStartDate(date)}
           />
         </div>
         <div className={appClasses.datePickerDiv}>
           <DatePicker
+            className={`${appClasses.datePicker} ${appClasses.input} ${appClasses.input__small}`}
             selected={startDate}
             onChange={date => setStartDate(date)}
             showTimeSelect
@@ -43,8 +44,8 @@ export default function Appointment(props) {
             dateFormat="h:mm aa"
           />
         </div>
-        <div className={appClasses.bookButton}>Book Now</div>
       </div>
+      <div className={appClasses.bookButton}>Book Now</div>
     </div>
   );
 }

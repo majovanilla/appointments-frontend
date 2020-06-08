@@ -54,7 +54,7 @@
 }
 
 .buttons {
-  width: 75%;
+  width: 55%;
   margin-top: 40px;
 }
 
@@ -68,26 +68,26 @@ select,
 }
 
 .bookButton {
+  z-index: 1;
   width: 150px;
   background: white;
   text-align: center;
   color: $green-color;
-  
+  margin-top: 30px;
 }
 
 .datePickerDiv {
   position: relative;
 }
 
-select,
-input {
+.input {
   color: white;
-  width: 200px;
+  width: 150px;
   border: 2px solid rgba(255,255,255,0.5);
   appearance: none;
   background: $green-color url(../img/triangle.png) no-repeat 80% / 20px;
-}
 
-input {
-  background: $green-color url(../img/triangle.png) no-repeat 90% / 20px;
+  &__small {
+    width: 100px;
+  }
 }
