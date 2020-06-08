@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import PropTypes from 'prop-types';
 import appClasses from '../styles/appointment.module.scss';
 
-export default function Appointment(props) {
-  const { tutorId } = props;
+export default function Appointment({ history }) {
+  const { tutorId } = history.location;
   const [startDate, setStartDate] = useState(new Date());
 
   return (
@@ -49,3 +50,11 @@ export default function Appointment(props) {
     </div>
   );
 }
+
+Appointment.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      tutorId: PropTypes.number.isRequired,
+    }),
+  }).isRequired,
+};

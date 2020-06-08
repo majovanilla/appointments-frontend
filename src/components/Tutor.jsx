@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import tutorClasses from '../styles/tutor.module.scss';
 import tutors from '../helpers';
 
 export default function Tutor({ match }) {
   const { id } = match.params;
   const tutor = tutors[id];
+  console.log('tutorID from tutor', tutor.id);
 
   return (
     <div className={tutorClasses.mainDiv}>
@@ -37,9 +39,15 @@ export default function Tutor({ match }) {
         <p className={tutorClasses.tutorInfo__text}>
           {tutor.about}
         </p>
-        <div className={tutorClasses.appointmentButton}>
+        <Link
+          to={{
+            pathname: '/appointments/new',
+            tutorId: tutor.id,
+          }}
+          className={tutorClasses.appointmentButton}
+        >
           Schedule a class
-        </div>
+        </Link>
       </div>
     </div>
   );
