@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { setToken } from '../../actions/authActions';
+import signupClasses from '../../styles/signup.module.scss';
 
 class Signup extends Component {
   constructor(props) {
@@ -60,9 +61,13 @@ class Signup extends Component {
     } = this.state;
 
     return (
-      <div>
-        <h1>This is the Signup form</h1>
-        <form onSubmit={this.handleSubmit}>
+      <div className={signupClasses.mainDiv}>
+        <h1 className={signupClasses.mainTitle}>
+          Welcome to the best resource
+          <br />
+          of teachers on the web!
+        </h1>
+        <form className={signupClasses.formDiv} onSubmit={this.handleSubmit}>
           <input type="name" name="name" placeholder="Name" value={name} onChange={this.handleChange} required />
           <input type="email" name="email" placeholder="Email" value={email} onChange={this.handleChange} required />
           <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} required />

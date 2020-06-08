@@ -6,7 +6,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className={homeClasses.home}>
-        <h1>This is the Home Page</h1>
+        <div className={homeClasses.bgImage} />
         <Signup />
       </div>
     );
