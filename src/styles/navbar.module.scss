@@ -9,6 +9,11 @@
   color:$font-color;
 }
 
+.navbar {
+  position: absolute;
+  z-index: 2;
+}
+
 .hambugerDiv {
   margin: 30px;
   z-index: 1;
