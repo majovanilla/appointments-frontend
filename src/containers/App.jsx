@@ -7,6 +7,7 @@ import Appointment from '../components/Appointment';
 import Tutor from '../components/Tutor';
 import TutorList from '../components/TutorList';
 import User from '../components/User';
+import Login from './auth/Login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/auth/login" component={Login} />
           <Route exact path="/appointments" component={AppointmentList} />
           <Route exact path="/appointments/new" component={Appointment} />
           <Route exact path="/tutors/" component={TutorList} />

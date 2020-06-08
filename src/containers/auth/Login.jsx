@@ -4,14 +4,13 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { setToken } from '../../actions/authActions';
-import signupClasses from '../../styles/auth.module.scss';
+import loginClasses from '../../styles/auth.module.scss';
 
-class Signup extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
       email: '',
       password: '',
       message: '',
@@ -19,14 +18,6 @@ class Signup extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.setStateFromResponse = this.setStateFromResponse.bind(this);
-  }
-
-  setStateFromResponse(response) {
-    const { message } = response.data;
-    this.setState({
-      message,
-    });
   }
 
   handleChange(event) {
@@ -37,20 +28,18 @@ class Signup extends Component {
 
   handleSubmit(event) {
     const {
-      name, email, password,
+      email, password,
     } = this.state;
 
 
-    axios.post('http://localhost:3000/signup', {
-      name,
+    axios.post('http://localhost:3000/auth/login', {
       email,
       password,
     }).then(response => {
-      this.setStateFromResponse(response);
       const { setToken } = this.props;
       setToken(response);
     }).catch(error => {
-      this.setStateFromResponse(error);
+      this.setState({ message: error.response.data.message });
     });
     event.preventDefault();
   }
@@ -58,28 +47,26 @@ class Signup extends Component {
 
   render() {
     const {
-      name, email, password,
+      email, password,
     } = this.state;
 
     return (
-      <div className={signupClasses.mainDiv}>
-        <h1 className={signupClasses.mainTitle}>
+      <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>
+        <div className={loginClasses.bgImage} />
+        <h1 className={loginClasses.mainTitle}>
           Welcome to the best resource
           <br />
           of teachers on the web!
         </h1>
-        <form className={signupClasses.formDiv} onSubmit={this.handleSubmit}>
-          <input type="name" name="name" placeholder="Name" value={name} onChange={this.handleChange} required />
+        <form className={loginClasses.formDiv} onSubmit={this.handleSubmit}>
           <input type="email" name="email" placeholder="Email" value={email} onChange={this.handleChange} required />
           <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} required />
-          <button type="submit">Sign Up</button>
+          <button type="submit">Login</button>
         </form>
         <p>
-          Already a user?
-          <span><Link to="/auth/login" className={signupClasses.link}>Login</Link></span>
+          Not a user?
+          <span><Link to="/" className={loginClasses.link}>Sign Up</Link></span>
         </p>
-        {' '}
-
       </div>
     );
   }
@@ -95,8 +82,8 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-Signup.propTypes = {
+Login.propTypes = {
   setToken: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
