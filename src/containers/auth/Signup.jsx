@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import setToken from '../../actions/authActions';
+import { setToken } from '../../actions/authActions';
 
 class Signup extends Component {
   constructor(props) {

@@ -7,7 +7,6 @@ import tutors from '../helpers';
 export default function Tutor({ match }) {
   const { id } = match.params;
   const tutor = tutors[id];
-  console.log('tutorID from tutor', tutor.id);
 
   return (
     <div className={tutorClasses.mainDiv}>

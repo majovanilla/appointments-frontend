@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Home from './Home';
-import AppointmentList from '../components/AppointmentList';
+import AppointmentList from './AppointmentList';
 import Appointment from '../components/Appointment';
 import Tutor from '../components/Tutor';
 import TutorList from '../components/TutorList';
