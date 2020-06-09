@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import tutorClasses from '../styles/tutorList.module.scss';
 import tutors from '../helpers';
 import twitter from '../img/twitter.png';
@@ -18,7 +19,7 @@ export default function TutorList() {
         </div>
       </div>
       {tutors.map(tutor => (
-        <div className={tutorClasses.tutorDiv} key={tutor.id}>
+        <Link to={`/tutors/${tutor.id}`} key={tutor.id} className={tutorClasses.tutorDiv}>
           <img className={tutorClasses.tutorPic} src={tutor.img} alt="Tutor profile" />
           <div className={tutorClasses.tutorInfo}>
             <p className={tutorClasses.tutorName}>{tutor.name}</p>
@@ -32,7 +33,7 @@ export default function TutorList() {
             <img className={tutorClasses.socialIcon} src={twitter} alt="twitter logo" />
             <img className={tutorClasses.socialIcon} src={fb} alt="Facebook logo" />
           </div>
-        </div>
+        </Link>
       ))}
       <div className={tutorClasses.nextButton}>
         <span>&gt;</span>

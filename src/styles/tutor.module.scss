@@ -2,8 +2,8 @@
 
 .mainDiv {
   display: grid;
-  grid-template-columns: [space1] 10% [image] 50% [details] 35% [space2] 5%;
-  grid-template-rows: [main] 70% [space1] auto;
+  grid-template-columns: [space1] 5% [image] 50% [details] 35% [space2] 5%;
+  grid-template-rows: [space2] auto [main] 70% [space1] auto;
   height: 100%;
 }
 
