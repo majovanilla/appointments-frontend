@@ -11,10 +11,12 @@ import TutorList from '../components/TutorList';
 import User from '../components/User';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
+import styles from '../styles/index.scss';
+
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <Router>
         <Navbar />
         <Switch>
