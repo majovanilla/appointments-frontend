@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { setToken } from '../../actions/authActions';
+import { Link, Redirect } from 'react-router-dom';
+import { setToken, setLogin } from '../../actions/authActions';
 import signupClasses from '../../styles/auth.module.scss';
 
 class Signup extends Component {
@@ -19,14 +19,6 @@ class Signup extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.setStateFromResponse = this.setStateFromResponse.bind(this);
-  }
-
-  setStateFromResponse(response) {
-    const { message } = response.data;
-    this.setState({
-      message,
-    });
   }
 
   handleChange(event) {
@@ -49,8 +41,9 @@ class Signup extends Component {
       this.setStateFromResponse(response);
       const { setToken } = this.props;
       setToken(response);
+      setLogin(true);
     }).catch(error => {
-      this.setStateFromResponse(error);
+      console.log(error);
     });
     event.preventDefault();
   }
@@ -61,8 +54,13 @@ class Signup extends Component {
       name, email, password,
     } = this.state;
 
+    const { loggedIn } = this.props;
+
+    if (loggedIn === true) { return (<Redirect to="/tutors" />); }
+
     return (
-      <div className={signupClasses.mainDiv}>
+      <div className={`${signupClasses.mainDiv} ${signupClasses.mainDiv__yellow}`}>
+        <div className={signupClasses.bgImage} />
         <h1 className={signupClasses.mainTitle}>
           Welcome to the best resource
           <br />
@@ -74,7 +72,7 @@ class Signup extends Component {
           <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} required />
           <button type="submit">Sign Up</button>
         </form>
-        <p>
+        <p className={signupClasses.linkName}>
           Already a user?
           <span><Link to="/auth/login" className={signupClasses.link}>Login</Link></span>
         </p>
@@ -85,15 +83,17 @@ class Signup extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
+  loggedIn: state.auth.loggedIn,
+  // currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setToken: response => {
-    dispatch(setToken(response.data.auth_token));
-  },
+  setToken: response => dispatch(setToken(response.data.auth_token)),
+  setLogin: status => dispatch(setLogin(status)),
 });
 
 Signup.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
   setToken: PropTypes.func.isRequired,
 };
 

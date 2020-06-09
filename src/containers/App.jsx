@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route, Redirect,
+  BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Home from './Home';
 import AppointmentList from './AppointmentList';
-import Appointment from '../components/Appointment';
+import Appointment from './Appointment';
 import Tutor from '../components/Tutor';
 import TutorList from '../components/TutorList';
 import User from '../components/User';
@@ -20,9 +20,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
           <Route exact path="/auth/signup" component={Signup} />
           <Route exact path="/auth/login" component={Login} />
           <Route exact path="/appointments" component={AppointmentList} />

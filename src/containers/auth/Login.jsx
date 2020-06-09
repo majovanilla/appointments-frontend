@@ -70,7 +70,7 @@ class Login extends Component {
         </form>
         <p className={loginClasses.linkName}>
           Not a user?
-          <span><Link to="/" className={loginClasses.link}>Sign Up</Link></span>
+          <span><Link to="/auth/signup" className={loginClasses.link}>Sign Up</Link></span>
         </p>
       </div>
     );
@@ -91,7 +91,7 @@ const mapDispatchToProps = dispatch => ({
 Login.propTypes = {
   setLogin: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
-  setToken: PropTypes.string.isRequired,
+  setToken: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
