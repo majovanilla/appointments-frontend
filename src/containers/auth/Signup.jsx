@@ -38,12 +38,11 @@ class Signup extends Component {
       email,
       password,
     }).then(response => {
-      this.setStateFromResponse(response);
-      const { setToken } = this.props;
+      const { setToken, setLogin } = this.props;
       setToken(response);
       setLogin(true);
-    }).catch(error => {
-      this.setState({ message: error });
+    }).catch(response => {
+      this.setState({ message: response });
     });
     event.preventDefault();
   }
@@ -58,9 +57,9 @@ class Signup extends Component {
 
     if (loggedIn === true) { return (<Redirect to="/tutors" />); }
 
-    if (message !== '') {
-      alert('Username must be free. Password at least 6 char long');
-    }
+    // if (message !== '') {
+    //   alert(message);
+    // }
 
     return (
       <div className={`${signupClasses.mainDiv} ${signupClasses.mainDiv__yellow}`}>
@@ -97,7 +96,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Signup.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
+  setLogin: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
 };
 
