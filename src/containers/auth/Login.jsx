@@ -48,12 +48,15 @@ class Login extends Component {
 
   render() {
     const {
-      email, password,
+      email, password, message,
     } = this.state;
 
     const { loggedIn } = this.props;
-
     if (loggedIn === true) { return (<Redirect to="/tutors" />); }
+
+    if (message !== '') {
+      alert(message);
+    }
 
     return (
       <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>
