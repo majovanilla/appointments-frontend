@@ -57,9 +57,9 @@ class Signup extends Component {
 
     if (loggedIn === true) { return (<Redirect to="/tutors" />); }
 
-    // if (message !== '') {
-    //   alert(message);
-    // }
+    if (message !== '') {
+      alert(message);
+    }
 
     return (
       <div className={`${signupClasses.mainDiv} ${signupClasses.mainDiv__yellow}`}>
@@ -96,6 +96,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Signup.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
   setLogin: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
 };

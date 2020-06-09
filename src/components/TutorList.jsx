@@ -19,8 +19,10 @@ export default function TutorList() {
         </div>
       </div>
       {tutors.map(tutor => (
-        <Link to={`/tutors/${tutor.id}`} key={tutor.id} className={tutorClasses.tutorDiv}>
-          <img className={tutorClasses.tutorPic} src={tutor.img} alt="Tutor profile" />
+        <div key={tutor.id} className={tutorClasses.tutorDiv}>
+          <Link to={`/tutors/${tutor.id}`}>
+            <img className={tutorClasses.tutorPic} src={tutor.img} alt="Tutor profile" />
+          </Link>
           <div className={tutorClasses.tutorInfo}>
             <p className={tutorClasses.tutorName}>{tutor.name}</p>
             <div className={tutorClasses.divisor}>
@@ -28,12 +30,11 @@ export default function TutorList() {
             </div>
             <p className={tutorClasses.about}>{tutor.about}</p>
           </div>
-
           <div className={tutorClasses.socialDiv}>
             <img className={tutorClasses.socialIcon} src={twitter} alt="twitter logo" />
             <img className={tutorClasses.socialIcon} src={fb} alt="Facebook logo" />
           </div>
-        </Link>
+        </div>
       ))}
       <div className={tutorClasses.nextButton}>
         <span>&gt;</span>

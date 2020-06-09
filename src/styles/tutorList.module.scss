@@ -50,8 +50,12 @@
 }
 
 .tutorPic {
-  max-width: 80%;
+  max-width: 100%;
   margin-bottom: 20px;
+  transition: max-width ease-in-out 0.3s;
+  &:hover {
+    max-width: 105%;
+  }
 }
 
 .tutorInfo {
@@ -79,7 +83,8 @@
   margin: 0 10px;
   opacity: 40%;
   &:hover {
-    opacity: 30%;
+    opacity: 150%;
+    cursor: pointer;
   }
 }
 
