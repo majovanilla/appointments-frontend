@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { setToken, loggedIn } from '../../actions/authActions';
+import { setToken, setLogin } from '../../actions/authActions';
 import loginClasses from '../../styles/auth.module.scss';
 
 class Login extends Component {
@@ -36,9 +36,9 @@ class Login extends Component {
       email,
       password,
     }).then(response => {
-      const { setToken, loggedIn } = this.props;
+      const { setLogin, setToken } = this.props;
       setToken(response);
-      loggedIn(true);
+      setLogin(true);
     }).catch(error => {
       this.setState({ message: error.response.data.message });
     });
@@ -53,11 +53,8 @@ class Login extends Component {
 
     const { loggedIn } = this.props;
 
-    if (loggedIn) {
-      return (
-        <Redirect to="/tutors" />
-      );
-    }
+    if (loggedIn === true) { return (<Redirect to="/tutors" />); }
+
     return (
       <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>
         <div className={loginClasses.bgImage} />
@@ -82,21 +79,18 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
-  currentUser: state.auth.currentUser,
+  loggedIn: state.auth.loggedIn,
+  // currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setToken: response => {
-    dispatch(setToken(response.data.auth_token));
-  },
-  loggedIn: status => {
-    dispatch(loggedIn(status));
-  },
+  setToken: response => dispatch(setToken(response.data.auth_token)),
+  setLogin: status => dispatch(setLogin(status)),
 });
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-  loggedIn: PropTypes.func.isRequired,
+  setLogin: PropTypes.bool.isRequired,
+  setToken: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

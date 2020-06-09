@@ -78,8 +78,6 @@ class Signup extends Component {
           Already a user?
           <span><Link to="/auth/login" className={signupClasses.link}>Login</Link></span>
         </p>
-        {' '}
-
       </div>
     );
   }

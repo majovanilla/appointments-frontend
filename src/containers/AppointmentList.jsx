@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import appClasses from '../styles/appointmentList.module.scss';
 
 class AppointmentList extends Component {
@@ -126,5 +127,9 @@ class AppointmentList extends Component {
 const mapStateToProps = state => ({
   currentUser: state.auth.currentUser,
 });
+
+AppointmentList.propTypes = {
+  currentUser: PropTypes.bool.isRequired,
+};
 
 export default connect(mapStateToProps)(AppointmentList);
