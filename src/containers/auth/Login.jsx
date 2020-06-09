@@ -68,7 +68,7 @@ class Login extends Component {
           <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} required />
           <button type="submit">Login</button>
         </form>
-        <p>
+        <p className={loginClasses.linkName}>
           Not a user?
           <span><Link to="/" className={loginClasses.link}>Sign Up</Link></span>
         </p>
@@ -89,7 +89,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Login.propTypes = {
-  setLogin: PropTypes.bool.isRequired,
+  setLogin: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
   setToken: PropTypes.string.isRequired,
 };
 

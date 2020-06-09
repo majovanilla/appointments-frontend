@@ -3,10 +3,10 @@
 .mainDiv {
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
-  grid-template-rows: [title] 15% [tutorDiv] 65%;
-  min-height: 100%;
+  grid-template-rows: [title] 15% [tutorDiv] 85%;
   margin: auto;
-  padding: 100px;
+  padding: 100px 0;
+  height: 74%;
 }
 
 .separator {
@@ -63,6 +63,7 @@
   font-weight: 700;
   text-align: center;
   font-size: 1.3rem;
+  color: black;
 }
 
 .socialDiv {
