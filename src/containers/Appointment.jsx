@@ -16,7 +16,6 @@ export class Appointment extends Component {
       location: 'london',
       date: new Date(),
       time: new Date(),
-      message: '',
       tutorId,
 
     };
@@ -57,7 +56,7 @@ export class Appointment extends Component {
       tutor_id: tutorId,
     };
 
-    const { authToken } = this.props;
+    const { authToken, history } = this.props;
 
     axios.post('http://localhost:3000/appointments/new', data,
       {
@@ -65,9 +64,9 @@ export class Appointment extends Component {
         { Authorization: `Bearer ${authToken}` },
       }).then(response => {
       console.log('reponse', response);
+      history.push('/appointments');
     }).catch(error => {
-      console.log('error', error);
-      // this.setState({ message: error });
+      alert(error);
     });
     event.preventDefault();
   }
@@ -129,6 +128,7 @@ const mapStateToProps = state => ({
 
 Appointment.propTypes = {
   history: PropTypes.shape({
+    push: PropTypes.string.isRequired,
     location: PropTypes.shape({
       tutorId: PropTypes.number.isRequired,
     }),
