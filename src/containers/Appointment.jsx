@@ -3,19 +3,27 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import appClasses from '../styles/appointment.module.scss';
 
-export default class Appointment extends Component {
+export class Appointment extends Component {
   constructor(props) {
     super(props);
+
+    const { tutorId } = this.props.history.location;
+
     this.state = {
-      location: '',
+      location: 'london',
       date: new Date(),
       time: new Date(),
       message: '',
+      tutorId,
+
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,30 +33,47 @@ export default class Appointment extends Component {
     });
   }
 
+  handleDateChange(date) {
+    this.setState({
+      date,
+    });
+  }
+
+  handleTimeChange(time) {
+    this.setState({
+      time,
+    });
+  }
+
   handleSubmit(event) {
     const {
-      location, date, time,
+      location, date, time, tutorId,
     } = this.state;
 
-    console.log('tutor id: ', this.props.history);
-    const { tutorId } = this.props.history.location;
-
-    axios.post('http://localhost:3000/appointments/new', {
+    const data = {
       location,
       date,
       time,
       tutor_id: tutorId,
-    }).then(response => {
-      console.log(response);
+    };
+
+    const { authToken } = this.props;
+
+    axios.post('http://localhost:3000/appointments/new', data,
+      {
+        headers:
+        { Authorization: `Bearer ${authToken}` },
+      }).then(response => {
+      console.log('reponse', response);
     }).catch(error => {
-      console.log(error);
+      console.log('error', error);
       // this.setState({ message: error });
     });
     event.preventDefault();
   }
 
   render() {
-    const { date } = this.state;
+    const { date, time } = this.state;
 
     return (
       <div className={appClasses.mainDiv}>
@@ -70,29 +95,37 @@ export default class Appointment extends Component {
           </select>
           <div className={appClasses.datePickerDiv}>
             <DatePicker
+              name="date"
               className={`${appClasses.datePicker} ${appClasses.input} `}
               selected={date}
-              onChange={date => date(date)}
+              dateFormat="dd/MM/yyyy"
+              shouldCloseOnSelect
+              onChange={date => this.handleDateChange(date)}
             />
           </div>
           <div className={appClasses.datePickerDiv}>
             <DatePicker
+              name="time"
               className={`${appClasses.datePicker} ${appClasses.input} ${appClasses.input__small}`}
-              selected={date}
-              onChange={date => date(date)}
+              selected={time}
+              onChange={time => this.handleTimeChange(time)}
               showTimeSelect
               showTimeSelectOnly
-              timeIntervals={15}
+              timeIntervals={60}
               timeCaption="Time"
               dateFormat="h:mm aa"
             />
           </div>
         </div>
-        <div className={appClasses.bookButton}>Book Now</div>
+        <button type="submit" className={appClasses.bookButton} onClick={this.handleSubmit}>Book Now</button>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  authToken: state.auth.authToken,
+});
 
 Appointment.propTypes = {
   history: PropTypes.shape({
@@ -100,4 +133,7 @@ Appointment.propTypes = {
       tutorId: PropTypes.number.isRequired,
     }),
   }).isRequired,
+  authToken: PropTypes.string.isRequired,
 };
+
+export default connect(mapStateToProps)(Appointment);
