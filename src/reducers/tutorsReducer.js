@@ -1,5 +1,5 @@
 const initState = {
-  tutors: [
+  list: [
     {
       id: 1,
       name: 'Juana Pérez',
@@ -35,7 +35,7 @@ const initState = {
 
 const tutorReducer = (state = initState, action) => ({
   ...state,
-  tutors: action.tutors,
+  list: action.list,
 });
 
 export default tutorReducer;

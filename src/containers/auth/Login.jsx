@@ -13,7 +13,6 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      message: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,8 +31,8 @@ class Login extends Component {
     } = this.state;
 
 
-    axios.post('https://appointments-api-majovanilla.herokuapp.com/auth/login', {
-    // axios.post('http://localhost:3000/auth/login', {
+    // axios.post('https://appointments-api-majovanilla.herokuapp.com/auth/login', {
+    axios.post('http://localhost:3000/auth/login', {
       email,
       password,
     }).then(response => {
@@ -41,23 +40,18 @@ class Login extends Component {
       setToken(response);
       setLogin(true);
     }).catch(error => {
-      this.setState({ message: error.response.data.message });
+      alert(error);
     });
     event.preventDefault();
   }
 
-
   render() {
     const {
-      email, password, message,
+      email, password,
     } = this.state;
 
     const { loggedIn } = this.props;
     if (loggedIn === true) { return (<Redirect to="/tutors" />); }
-
-    if (message !== '') {
-      alert(message);
-    }
 
     return (
       <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>

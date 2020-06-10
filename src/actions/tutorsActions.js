@@ -1,7 +1,7 @@
-function setTutors(data) {
+function setTutors(list) {
   return {
     type: 'SET_TUTORS',
-    data,
+    list,
   };
 }
 

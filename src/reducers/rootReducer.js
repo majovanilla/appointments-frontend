@@ -6,7 +6,7 @@ import tutorsReducer from './tutorsReducer';
 const rootReducer = combineReducers({
   auth: authReducer,
   appt: apptReducer,
-  // tutors: tutorsReducer,
+  tutors: tutorsReducer,
 });
 
 export default rootReducer;
