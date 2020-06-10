@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import appClasses from '../styles/appointment.module.scss';
+import { setAppointments } from '../actions/apptActions';
 
 export class Appointment extends Component {
   constructor(props) {
     super(props);
-
-    const { tutorId } = this.props.history.location;
+    const { history } = this.props;
+    const { tutorId } = history.location;
 
     this.state = {
       location: 'london',
@@ -58,16 +59,22 @@ export class Appointment extends Component {
 
     const { authToken, history } = this.props;
 
-    axios.post('http://localhost:3000/appointments/new', data,
+    axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
+    // axios.post('http://localhost:3000/appointments/new',
+      data,
       {
-        headers:
-        { Authorization: `Bearer ${authToken}` },
-      }).then(response => {
-      console.log('reponse', response);
-      history.push('/appointments');
-    }).catch(error => {
-      alert(error);
-    });
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+      .then(response => {
+        const { setAppointment } = this.props;
+        setAppointment(response.data);
+        console.log('reponse', response);
+        history.push('/appointments');
+      }).catch(error => {
+        alert(error);
+      });
     event.preventDefault();
   }
 
@@ -124,16 +131,22 @@ export class Appointment extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
+  appointments: state.appt.appointments,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setAppointment: appointments => dispatch(setAppointments(appointments)),
 });
 
 Appointment.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.string.isRequired,
+    push: PropTypes.func.isRequired,
     location: PropTypes.shape({
       tutorId: PropTypes.number.isRequired,
     }),
   }).isRequired,
   authToken: PropTypes.string.isRequired,
+  setAppointment: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Appointment);
+export default connect(mapStateToProps, mapDispatchToProps)(Appointment);
