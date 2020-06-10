@@ -5,12 +5,13 @@ const initState = {
 };
 
 const authReducer = (state = initState, action) => {
+  let token;
   switch (action.type) {
     case 'SET_TOKEN':
-      localStorage.setItem('token', action.authToken);
+      token = localStorage.setItem('token', action.authToken);
       return {
         ...state,
-        authToken: action.authToken,
+        authToken: token,
       };
     default:
       return state;
