@@ -12,8 +12,4 @@ function setLogin(status) {
   };
 }
 
-const getToken = () => ({
-  type: 'GET_TOKEN',
-});
-
-export { setToken, setLogin, getToken };
+export { setToken, setLogin };

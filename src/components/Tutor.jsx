@@ -1,55 +1,81 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import tutorClasses from '../styles/tutor.module.scss';
-import tutors from '../helpers';
 
-export default function Tutor({ match }) {
-  const { id } = match.params;
-  const tutor = tutors[id - 1];
+export default class Tutor extends Component {
+  constructor(props) {
+    super(props);
+    const { match } = props;
 
-  return (
-    <div className={tutorClasses.mainDiv}>
-      <div className={tutorClasses.tutorImgDiv}>
-        <img src={tutor.img} alt="tutor profile" className={tutorClasses.tutorImg} />
-      </div>
-      <div className={tutorClasses.tutorInfoDiv}>
-        <h1 className={tutorClasses.tutorName}>{tutor.name}</h1>
-        <div>
-          <div className={`${tutorClasses.tutorInfo} ${tutorClasses.tutorInfo__gray}`}>
-            <p className={`${tutorClasses.tutorInfo__title}`}>Rate</p>
-            <p className={`${tutorClasses.tutorInfo__text}`}>
-              {tutor.rate}
-            </p>
-          </div>
-          <div className={tutorClasses.tutorInfo}>
-            <p className={`${tutorClasses.tutorInfo__title}`}>Years of experience</p>
-            <p className={tutorClasses.tutorInfo__text}>
-              {tutor.experience}
-            </p>
-          </div>
-          <div className={`${tutorClasses.tutorInfo} ${tutorClasses.tutorInfo__gray}`}>
-            <p className={`${tutorClasses.tutorInfo__title}`}>Subject</p>
-            <p className={`${tutorClasses.tutorInfo__text}`}>
-              {tutor.subject}
-            </p>
-          </div>
+    this.state = {
+      id: match.params.id,
+      tutor: {},
+    };
+  }
+
+  componentDidMount() {
+    const authToken = localStorage.getItem('token');
+    // axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {}, {
+    axios.get(`http://localhost:3000/tutors/${this.state.id}`, {
+      headers: { Authorization: `Bearer ${authToken}` },
+    }).then(response => {
+      console.log(response);
+      this.setState({ tutor: response.data });
+      // const { setTutors } = this.props;
+      // setTutors(response.data);
+    }).catch(error => {
+      alert(error);
+    });
+  }
+
+  render() {
+    const { tutor } = this.state;
+
+    return (
+      <div className={tutorClasses.mainDiv}>
+        <div className={tutorClasses.tutorImgDiv}>
+          <img src={tutor.img} alt="tutor profile" className={tutorClasses.tutorImg} />
         </div>
-        <p className={tutorClasses.tutorInfo__text}>
-          {tutor.about}
-        </p>
-        <Link
-          to={{
-            pathname: '/appointments/new',
-            tutorId: tutor.id,
-          }}
-          className={tutorClasses.appointmentButton}
-        >
-          Schedule a class
-        </Link>
+        <div className={tutorClasses.tutorInfoDiv}>
+          <h1 className={tutorClasses.tutorName}>{tutor.name}</h1>
+          <div>
+            <div className={`${tutorClasses.tutorInfo} ${tutorClasses.tutorInfo__gray}`}>
+              <p className={`${tutorClasses.tutorInfo__title}`}>Rate</p>
+              <p className={`${tutorClasses.tutorInfo__text}`}>
+                {tutor.rate}
+              </p>
+            </div>
+            <div className={tutorClasses.tutorInfo}>
+              <p className={`${tutorClasses.tutorInfo__title}`}>Years of experience</p>
+              <p className={tutorClasses.tutorInfo__text}>
+                {tutor.experience}
+              </p>
+            </div>
+            <div className={`${tutorClasses.tutorInfo} ${tutorClasses.tutorInfo__gray}`}>
+              <p className={`${tutorClasses.tutorInfo__title}`}>Subject</p>
+              <p className={`${tutorClasses.tutorInfo__text}`}>
+                {tutor.subject}
+              </p>
+            </div>
+          </div>
+          <p className={tutorClasses.tutorInfo__text}>
+            {tutor.about}
+          </p>
+          <Link
+            to={{
+              pathname: '/appointments/new',
+              tutorId: tutor.id,
+            }}
+            className={tutorClasses.appointmentButton}
+          >
+            Schedule a class
+          </Link>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Tutor.propTypes = {
