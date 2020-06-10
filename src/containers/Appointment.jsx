@@ -73,7 +73,7 @@ export class Appointment extends Component {
         console.log('reponse', response);
         history.push('/appointments');
       }).catch(error => {
-        alert(error);
+        console.log(error);
       });
     event.preventDefault();
   }

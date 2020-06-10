@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import tutorClasses from '../styles/tutorList.module.scss';
-import tutors from '../helpers';
 import twitter from '../img/twitter.png';
 import fb from '../img/fb.png';
 
-export default function TutorList() {
+export function TutorList(props) {
+  const { tutors } = props;
+
   return (
     <div className={tutorClasses.mainDiv}>
       <div className={tutorClasses.prevButton}>
@@ -42,3 +45,13 @@ export default function TutorList() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  tutors: state.tutors,
+});
+
+TutorList.propTypes = {
+  tutors: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default connect(mapStateToProps)(TutorList);
