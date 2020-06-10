@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { setToken, setLogin } from '../../actions/authActions';
+import { setToken } from '../../actions/authActions';
 import signupClasses from '../../styles/auth.module.scss';
 
 class Signup extends Component {
@@ -14,7 +14,6 @@ class Signup extends Component {
       name: '',
       email: '',
       password: '',
-      message: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,11 +38,10 @@ class Signup extends Component {
       email,
       password,
     }).then(response => {
-      const { setToken, setLogin } = this.props;
+      const { setToken } = this.props;
       setToken(response);
-      setLogin(true);
-    }).catch(response => {
-      this.setState({ message: response });
+    }).catch(error => {
+      alert(error);
     });
     event.preventDefault();
   }
@@ -51,16 +49,11 @@ class Signup extends Component {
 
   render() {
     const {
-      name, email, password, message,
+      name, email, password,
     } = this.state;
 
-    const { loggedIn } = this.props;
-
-    if (loggedIn === true) { return (<Redirect to="/tutors" />); }
-
-    if (message !== '') {
-      alert(message);
-    }
+    const token = localStorage.getItem('token');
+    if (token) { return (<Redirect to="/tutors" />); }
 
     return (
       <div className={`${signupClasses.mainDiv} ${signupClasses.mainDiv__yellow}`}>
@@ -87,18 +80,13 @@ class Signup extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
-  loggedIn: state.auth.loggedIn,
-  // currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
   setToken: response => dispatch(setToken(response.data.auth_token)),
-  setLogin: status => dispatch(setLogin(status)),
 });
 
 Signup.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
-  setLogin: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
 };
 

@@ -12,16 +12,8 @@ function setLogin(status) {
   };
 }
 
-// const getToken = authToken => ({
-//   type: 'GET_TOKEN',
-//   authToken,
-// });
+const getToken = () => ({
+  type: 'GET_TOKEN',
+});
 
-// function setCurrentUser(currentUser) {
-//   return {
-//     type: 'SET_CURRENT_USER',
-//     currentUser,
-//   };
-// }
-
-export { setToken, setLogin };
+export { setToken, setLogin, getToken };

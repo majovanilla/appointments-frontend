@@ -12,20 +12,20 @@ export class TutorList extends Component {
   constructor(props) {
     super(props);
 
-    // const { tutors } = this.props;
-
     this.state = {
       tutors: [],
     };
   }
 
   componentDidMount() {
-    const { authToken } = this.props;
+    const authToken = localStorage.getItem('token');
     // axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {}, {
     axios.get('http://localhost:3000/tutors', {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(response => {
       this.setState({ tutors: response.data });
+      const { setTutors } = this.props;
+      setTutors(response.data);
     }).catch(error => {
       alert(error);
     });
@@ -33,6 +33,7 @@ export class TutorList extends Component {
 
   render() {
     const { tutors } = this.state;
+
     return (
       <div className={tutorClasses.mainDiv}>
         <div className={tutorClasses.prevButton}>
@@ -82,7 +83,7 @@ const mapDispatchToProps = dispatch => ({
 
 TutorList.propTypes = {
   // tutors: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // setTutors: PropTypes.func.isRequired,
+  setTutors: PropTypes.func.isRequired,
   authToken: PropTypes.string.isRequired,
 };
 

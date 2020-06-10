@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { setToken, setLogin } from '../../actions/authActions';
+import { setToken } from '../../actions/authActions';
 import loginClasses from '../../styles/auth.module.scss';
 
 class Login extends Component {
@@ -36,9 +36,8 @@ class Login extends Component {
       email,
       password,
     }).then(response => {
-      const { setLogin, setToken } = this.props;
+      const { setToken } = this.props;
       setToken(response);
-      setLogin(true);
     }).catch(error => {
       alert(error);
     });
@@ -49,9 +48,8 @@ class Login extends Component {
     const {
       email, password,
     } = this.state;
-
-    const { loggedIn } = this.props;
-    if (loggedIn === true) { return (<Redirect to="/tutors" />); }
+    const token = localStorage.getItem('token');
+    if (token) { return (<Redirect to="/tutors" />); }
 
     return (
       <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>
@@ -77,18 +75,13 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
-  loggedIn: state.auth.loggedIn,
-  // currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
   setToken: response => dispatch(setToken(response.data.auth_token)),
-  setLogin: status => dispatch(setLogin(status)),
 });
 
 Login.propTypes = {
-  setLogin: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
   setToken: PropTypes.func.isRequired,
 };
 

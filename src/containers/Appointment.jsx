@@ -57,10 +57,11 @@ export class Appointment extends Component {
       tutor_id: tutorId,
     };
 
-    const { authToken, history } = this.props;
+    const { history } = this.props;
+    const authToken = localStorage.getItem('token');
 
-    axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
-    // axios.post('http://localhost:3000/appointments/new',
+    // axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
+    axios.post('http://localhost:3000/appointments/new',
       data,
       {
         headers: {
@@ -70,10 +71,9 @@ export class Appointment extends Component {
       .then(response => {
         const { setAppointment } = this.props;
         setAppointment(response.data);
-        console.log('reponse', response);
         history.push('/appointments');
       }).catch(error => {
-        console.log(error);
+        alert(error);
       });
     event.preventDefault();
   }
