@@ -29,12 +29,19 @@
 }
 
 .navToggle {
-  display: none;
   justify-content: space-between;
-  background: $gray-color;
+  background: $white-title-color;
   position: absolute;
   padding: 30px;
   min-height: 100vh;
+  transition: ease-in-out;
+
+  &__visible {
+    display: flex;
+  }
+  &__invisible {
+    display: none;
+  }
 }
 
 .navMenu {
