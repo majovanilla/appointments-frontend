@@ -19,7 +19,7 @@ export class TutorList extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {}, {
+    axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(response => {
       const { setTutors } = this.props;
