@@ -12,11 +12,12 @@ export default function Home(props) {
   // if (loggedIn === false) { return (<Redirect to="/auth/login" />); }
   if (!token) { return (<Redirect to="/auth/login" />); }
 
+
   return (
-    <div className={homeClasses.home}>
-      <div className={homeClasses.bgImage} />
-      <TutorList />
-    </div>
+    // <div className={homeClasses.home}>
+    //   <div className={homeClasses.bgImage} />
+    // </div>
+    <Redirect to="/tutors" />
   );
 }
 
