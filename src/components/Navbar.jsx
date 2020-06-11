@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import navClasses from '../styles/navbar.module.scss';
-import hambWhite from '../img/hamb.png';
 import hambBlack from '../img/hamb-black.png';
 import fb from '../img/fb.png';
 import twitter from '../img/twitter.png';
@@ -17,30 +17,36 @@ export default class Navbar extends Component {
     };
 
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   handleToggle(event) {
+    const { visible } = this.state;
     if (event.target.alt === 'toggle icon') {
-      const { visible } = this.state;
       this.setState({ visible: !visible });
     }
+  }
+
+  handleLogOut() {
+    const { visible } = this.state;
+    localStorage.removeItem('token');
+    this.setState({ visible: !visible });
   }
 
   render() {
     const { visible } = this.state;
     const visibleClass = visible ? navClasses.navToggle__visible : navClasses.navToggle__invisible;
-    const hamburger = visible ? hambBlack : hambWhite;
+
     return (
       <div className={navClasses.navbar}>
-        <div className={navClasses.hambugerDiv}>
-          <img src={hamburger} alt="toggle icon" className={navClasses.hambugerButton} onClick={this.handleToggle} />
-        </div>
+        <button type="button" className={navClasses.hambugerDiv} onClick={this.handleToggle}>
+          <img src={hambBlack} alt="toggle icon" className={navClasses.hambugerButton} />
+        </button>
         <div className={`${navClasses.navToggle} ${visibleClass}`}>
           <ul className={navClasses.navMenu}>
-            <li className={navClasses.navItem}>Home</li>
-            <li className={navClasses.navItem}>Login</li>
-            <li className={navClasses.navItem}>Sign Up</li>
-            <li className={navClasses.navItem}>Appointments</li>
+            <li className={navClasses.navItem}><Link to="/" className={navClasses.navItem}>Tutors</Link></li>
+            <li className={navClasses.navItem}><Link to="/" className={navClasses.navItem} onClick={this.handleLogOut}>Log out</Link></li>
+            <li className={navClasses.navItem}><Link to="/appointments" className={navClasses.navItem}>Appointments</Link></li>
           </ul>
           <div className={navClasses.socialDiv}>
             <img className={navClasses.socialIcon} src={twitter} alt="twitter logo" />
