@@ -19,10 +19,9 @@ export class TutorList extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    axios.get('http://localhost:3000/tutors', {}, {
+    axios.get('http://localhost:3000/tutors', {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(response => {
-      console.log(response);
       const { setTutors } = this.props;
       setTutors(response.data);
       this.setState({ tutors: response.data });

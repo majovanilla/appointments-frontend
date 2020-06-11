@@ -17,11 +17,12 @@ export default class Tutor extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    axios.get(`http://localhost:3000/tutors/${this.state.id}`, {}, {
+    axios.get(`http://localhost:3000/tutors/${this.state.id}`, {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(response => {
       this.setState({ tutor: response.data });
     }).catch(error => {
+      // eslint-disable-next-line no-alert
       alert(error);
     });
   }
