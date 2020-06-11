@@ -6,7 +6,7 @@ import axios from 'axios';
 import tutorClasses from '../styles/tutorList.module.scss';
 import twitter from '../img/twitter.png';
 import fb from '../img/fb.png';
-import { setTutors } from '../actions/tutorsActions';
+import setTutors from '../actions/tutorsActions';
 
 export class TutorList extends Component {
   constructor(props) {
@@ -19,14 +19,14 @@ export class TutorList extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    // axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {}, {
-    axios.get('http://localhost:3000/tutors', {
+    axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {}, {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(response => {
       const { setTutors } = this.props;
       setTutors(response.data);
       this.setState({ tutors: response.data });
     }).catch(error => {
+      // eslint-disable-next-line no-alert
       alert(error);
     });
   }
@@ -74,7 +74,6 @@ export class TutorList extends Component {
 
 const mapStateToProps = state => ({
   tutors: state.tutors.list,
-  authToken: state.auth.authToken,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -82,9 +81,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 TutorList.propTypes = {
-  // tutors: PropTypes.arrayOf(PropTypes.object).isRequired,
   setTutors: PropTypes.func.isRequired,
-  authToken: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorList);

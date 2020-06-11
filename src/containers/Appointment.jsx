@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import appClasses from '../styles/appointment.module.scss';
-import { setAppointments } from '../actions/apptActions';
+import setAppointments from '../actions/apptActions';
 
 export class Appointment extends Component {
   constructor(props) {
@@ -60,8 +60,7 @@ export class Appointment extends Component {
     const { history } = this.props;
     const authToken = localStorage.getItem('token');
 
-    // axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
-    axios.post('http://localhost:3000/appointments/new',
+    axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
       data,
       {
         headers: {
@@ -73,6 +72,7 @@ export class Appointment extends Component {
         setAppointment(response.data);
         history.push('/appointments');
       }).catch(error => {
+        // eslint-disable-next-line no-alert
         alert(error);
       });
     event.preventDefault();
@@ -145,7 +145,6 @@ Appointment.propTypes = {
       tutorId: PropTypes.number.isRequired,
     }),
   }).isRequired,
-  authToken: PropTypes.string.isRequired,
   setAppointment: PropTypes.func.isRequired,
 };
 

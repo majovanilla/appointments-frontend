@@ -32,8 +32,7 @@ class Signup extends Component {
     } = this.state;
 
 
-    // axios.post('https://appointments-api-majovanilla.herokuapp.com/signup', {
-    axios.post('http://localhost:3000/signup', {
+    axios.post('https://appointments-api-majovanilla.herokuapp.com/signup', {
       name,
       email,
       password,

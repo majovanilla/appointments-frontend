@@ -15,8 +15,7 @@ export class AppointmentList extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    // axios.get('https://appointments-api-majovanilla.herokuapp.com/appointments',
-    axios.get('http://localhost:3000/appointments',
+    axios.get('https://appointments-api-majovanilla.herokuapp.com/appointments',
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -25,6 +24,7 @@ export class AppointmentList extends Component {
       .then(response => {
         this.setState({ appointments: response.data });
       }).catch(error => {
+        // eslint-disable-next-line no-alert
         alert(error);
       });
   }
@@ -69,7 +69,6 @@ const mapStateToProps = state => ({
 });
 
 AppointmentList.propTypes = {
-  authToken: PropTypes.string.isRequired,
   tutors: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

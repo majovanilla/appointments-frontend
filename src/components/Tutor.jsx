@@ -17,14 +17,10 @@ export default class Tutor extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    // axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {}, {
-    axios.get(`http://localhost:3000/tutors/${this.state.id}`, {
+    axios.get(`https://appointments-api-majovanilla.herokuapp.com/tutors/${this.state.id}`, {}, {
       headers: { Authorization: `Bearer ${authToken}` },
     }).then(response => {
-      console.log(response);
       this.setState({ tutor: response.data });
-      // const { setTutors } = this.props;
-      // setTutors(response.data);
     }).catch(error => {
       alert(error);
     });
