@@ -15,7 +15,7 @@ export class AppointmentList extends Component {
 
   componentDidMount() {
     const authToken = localStorage.getItem('token');
-    axios.get('https://appointments-api-majovanilla.herokuapp.com/appointments',
+    axios.get('http://localhost:3000/appointments',
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
