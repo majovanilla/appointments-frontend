@@ -18,17 +18,15 @@ export class AppointmentList extends Component {
 
   componentDidMount() {
     if (this.token) {
-      axios.get('http://localhost:3000/appointments',
-        {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        })
-        .then(response => {
-          this.setState({ appointments: response.data });
-        }).catch(error => {
-          alert(error);
-        });
+      axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }).then(response => {
+        this.setState({ appointments: response.data });
+      }).catch(error => {
+        alert(error);
+      });
     }
   }
 
