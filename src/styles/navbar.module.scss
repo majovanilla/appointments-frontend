@@ -1,15 +1,19 @@
 @import 'variables';
 
-.navbar,
 .navMenu,
 .navToggle {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  color:$font-color;
+  color: $font-color;
 }
 
 .navbar {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  color: $font-color;
   position: absolute;
   z-index: 2;
 }
@@ -23,16 +27,12 @@
 
   &:focus {
     outline: none;
-  } 
+  }
 }
 
 .hambugerButton {
   width: 20px;
   height: 20px;
-}
-
-.navbar {
-  width: 20%;
 }
 
 .navToggle {
@@ -46,6 +46,7 @@
   &__visible {
     display: flex;
   }
+
   &__invisible {
     display: none;
   }
@@ -63,7 +64,7 @@
   text-decoration: none;
 
   &:hover {
-    text-decoration: underline;;
+    text-decoration: underline;
   }
 }
 
@@ -76,6 +77,7 @@
 
 .socialIcon {
   width: 20px;
+
   &:hover {
     opacity: 60%;
   }

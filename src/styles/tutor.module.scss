@@ -38,10 +38,6 @@
   display: flex;
   justify-content: space-between;
 
-  &__text {
-
-  }
-
   &__gray {
     background-color: $gray-color;
   }
@@ -53,14 +49,14 @@
 
 .appointmentButton {
   grid-column: main;
-    width: 60%;
-    background: $green-color;
-    align-self: flex-end;
-    padding: 20px;
-    border: $white-title-color 3px solid;
-    border-radius: 120px;
-    text-align: center;
-    color: $white-title-color;
-    font-weight: 700;
-    font-size: 1.2rem;
+  width: 60%;
+  background: $green-color;
+  align-self: flex-end;
+  padding: 20px;
+  border: $white-title-color 3px solid;
+  border-radius: 120px;
+  text-align: center;
+  color: $white-title-color;
+  font-weight: 700;
+  font-size: 1.2rem;
 }

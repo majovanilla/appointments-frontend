@@ -3,7 +3,7 @@
 .mainDiv {
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
-  grid-template-rows: [title] 15% [tutorDiv] 85%;
+  grid-template-rows: [title] 15% [tutordiv] 85%;
   margin: auto;
   padding: 100px 0;
   height: 74%;
@@ -53,6 +53,7 @@
   max-width: 100%;
   margin-bottom: 20px;
   transition: max-width ease-in-out 0.3s;
+
   &:hover {
     max-width: 105%;
   }
@@ -82,6 +83,7 @@
   height: 20px;
   margin: 0 10px;
   opacity: 40%;
+
   &:hover {
     opacity: 150%;
     cursor: pointer;
