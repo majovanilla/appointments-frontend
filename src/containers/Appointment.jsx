@@ -17,14 +17,12 @@ export class Appointment extends Component {
     this.state = {
       location: 'london',
       date: new Date(),
-      time: new Date(),
       tutorId,
 
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -40,21 +38,14 @@ export class Appointment extends Component {
     });
   }
 
-  handleTimeChange(time) {
-    this.setState({
-      time,
-    });
-  }
-
   handleSubmit(event) {
     const {
-      location, date, time, tutorId,
+      location, date, tutorId,
     } = this.state;
 
     const data = {
       location,
       date,
-      time,
       tutor_id: tutorId,
     };
 
@@ -80,7 +71,7 @@ export class Appointment extends Component {
   }
 
   render() {
-    const { date, time, tutorId } = this.state;
+    const { date, tutorId } = this.state;
 
     if (!tutorId) { return (<Redirect to="/tutors" />); }
 
@@ -102,29 +93,20 @@ export class Appointment extends Component {
             <option value="mexico city">Mexico City</option>
             <option value="rwanda">Rwanda</option>
           </select>
-          <div className={appClasses.datePickerDiv}>
-            <DatePicker
-              name="date"
-              className={`${appClasses.datePicker} ${appClasses.input} `}
-              selected={date}
-              dateFormat="dd/MM/yyyy"
-              shouldCloseOnSelect
-              onChange={date => this.handleDateChange(date)}
-            />
-          </div>
-          <div className={appClasses.datePickerDiv}>
-            <DatePicker
-              name="time"
-              className={`${appClasses.datePicker} ${appClasses.input} ${appClasses.input__small}`}
-              selected={time}
-              onChange={time => this.handleTimeChange(time)}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={60}
-              timeCaption="Time"
-              dateFormat="h:mm aa"
-            />
-          </div>
+          {/* <div className={appClasses.datePickerDiv}> */}
+          <DatePicker
+            name="date"
+            className={`${appClasses.datePicker} ${appClasses.input} `}
+            selected={date}
+            onChange={date => this.handleDateChange(date)}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={60}
+            timeCaption="time"
+            dateFormat="MMMM d, yyyy h:mm aa"
+            shouldCloseOnSelect
+          />
+          {/* </div> */}
         </div>
         <button type="submit" className={appClasses.bookButton} onClick={this.handleSubmit}>Book Now</button>
       </div>

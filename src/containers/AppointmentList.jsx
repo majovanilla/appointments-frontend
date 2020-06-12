@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import appClasses from '../styles/appointmentList.module.scss';
 
@@ -31,7 +30,6 @@ export class AppointmentList extends Component {
   }
 
   render() {
-    const { tutors } = this.props;
     const { appointments } = this.state;
 
     if (!this.token) {
@@ -48,7 +46,7 @@ export class AppointmentList extends Component {
             <ul className={appClasses.appointment} key={appointment.id}>
               <li className={`${appClasses.tutor} ${appClasses.appElement}`}>
                 Tutor:
-                <span className={appClasses.spanInfo}>{`${tutors}[${appointment.tutor_id}]`}</span>
+                <span className={appClasses.spanInfo}>{appointment.tutor_id}</span>
               </li>
               <li className={`${appClasses.location} ${appClasses.appElement}`}>
                 Location:
@@ -57,10 +55,6 @@ export class AppointmentList extends Component {
               <li className={`${appClasses.date} ${appClasses.appElement}`}>
                 Date:
                 <span className={appClasses.spanInfo}>{appointment.date}</span>
-              </li>
-              <li className={`${appClasses.time} ${appClasses.appElement}`}>
-                Time:
-                <span className={appClasses.spanInfo}>{appointment.time}</span>
               </li>
             </ul>
           ))}
@@ -72,11 +66,6 @@ export class AppointmentList extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
-  tutors: state.tutors.list,
 });
-
-AppointmentList.propTypes = {
-  tutors: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default connect(mapStateToProps)(AppointmentList);
