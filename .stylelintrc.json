@@ -14,7 +14,5 @@
     "dist/**",
     "**/reset*.css",
     "**/bootstrap*.css"
-  ],
-  "jsx-a11y/href-no-hash": "off",
-  "jsx-a11y/img-has-alt": "off"
+  ]
 }
