@@ -9,6 +9,7 @@ export default class Tutor extends Component {
     super(props);
     const { match } = props;
 
+    this.token = localStorage.getItem('token');
     this.state = {
       id: match.params.id,
       tutor: {},
@@ -16,22 +17,29 @@ export default class Tutor extends Component {
   }
 
   componentDidMount() {
-    const authToken = localStorage.getItem('token');
-    axios.get(`http://localhost:3000/tutors/${this.state.id}`, {
-      headers: { Authorization: `Bearer ${authToken}` },
-    }).then(response => {
-      this.setState({ tutor: response.data });
-    }).catch(error => {
+    const { id, token } = this.state;
+    if (this.token) {
+      axios.get(`http://localhost:3000/tutors/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(response => {
+        this.setState({ tutor: response.data });
+      }).catch(error => {
       // eslint-disable-next-line no-alert
-      alert(error);
-    });
+        alert(error);
+      });
+    }
   }
 
   render() {
     const { tutor } = this.state;
-    const token = localStorage.getItem('token');
 
-    if (!token) { return (<Redirect to="/" />); }
+    if (!this.token) {
+      alert('Please login first');
+      return (
+        <Redirect to="/" />
+      );
+    }
+
     return (
       <div className={tutorClasses.mainDiv}>
         <div className={tutorClasses.tutorImgDiv}>
