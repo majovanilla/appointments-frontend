@@ -34,5 +34,9 @@
             "error",
             "as-needed"
         ]
-    }
+    },
+    "ignorePatterns": [
+        "dist/",
+        "build/"
+    ]
 }
