@@ -1,6 +1,7 @@
+/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import tutorClasses from '../styles/tutor.module.scss';
 
@@ -9,6 +10,7 @@ export default class Tutor extends Component {
     super(props);
     const { match } = props;
 
+    this.token = localStorage.getItem('token');
     this.state = {
       id: match.params.id,
       tutor: {},
@@ -16,18 +18,27 @@ export default class Tutor extends Component {
   }
 
   componentDidMount() {
-    const authToken = localStorage.getItem('token');
+    const { id } = this.state;
+    if (this.token) {
     axios.get(`https://appointments-api-majovanilla.herokuapp.com/tutors/${this.state.id}`, {
-      headers: { Authorization: `Bearer ${authToken}` },
-    }).then(response => {
-      this.setState({ tutor: response.data });
-    }).catch(error => {
-      alert(error);
-    });
+        headers: { Authorization: `Bearer ${this.token}` },
+      }).then(response => {
+        this.setState({ tutor: response.data });
+      }).catch(error => {
+        alert(error);
+      });
+    }
   }
 
   render() {
     const { tutor } = this.state;
+
+    if (!this.token) {
+      alert('Please login first');
+      return (
+        <Redirect to="/" />
+      );
+    }
 
     return (
       <div className={tutorClasses.mainDiv}>

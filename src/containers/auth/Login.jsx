@@ -31,7 +31,7 @@ class Login extends Component {
     } = this.state;
 
 
-    // axios.post('https://appointments-api-majovanilla.herokuapp.com/auth/login', {
+    // axios.post('http://localhost:3000/auth/login', {
     axios.post('http://localhost:3000/auth/login', {
       email,
       password,
