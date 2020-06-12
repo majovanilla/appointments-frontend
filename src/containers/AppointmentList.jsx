@@ -18,7 +18,7 @@ export class AppointmentList extends Component {
 
   componentDidMount() {
     if (this.token) {
-      axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
+      axios.get('https://appointments-api-majovanilla.herokuapp.com/appointments', {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
