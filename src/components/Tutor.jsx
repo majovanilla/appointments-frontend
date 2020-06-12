@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
@@ -18,13 +17,14 @@ export default class Tutor extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.state;
+    const { id, token } = this.state;
     if (this.token) {
       axios.get(`http://localhost:3000/tutors/${id}`, {
-        headers: { Authorization: `Bearer ${this.token}` },
+        headers: { Authorization: `Bearer ${token}` },
       }).then(response => {
         this.setState({ tutor: response.data });
       }).catch(error => {
+      // eslint-disable-next-line no-alert
         alert(error);
       });
     }
