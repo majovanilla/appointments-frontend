@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -20,7 +21,7 @@ export class TutorList extends Component {
 
   componentDidMount() {
     if (this.token) {
-      axios.get('http://localhost:3000/tutors', {
+      axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
         headers: { Authorization: `Bearer ${this.token}` },
       }).then(response => {
         const { setTutors } = this.props;

@@ -31,7 +31,6 @@ class Login extends Component {
     } = this.state;
 
 
-    // axios.post('http://localhost:3000/auth/login', {
     axios.post('http://localhost:3000/auth/login', {
       email,
       password,
@@ -39,6 +38,7 @@ class Login extends Component {
       const { setToken } = this.props;
       setToken(response);
     }).catch(error => {
+      // eslint-disable-next-line no-alert
       alert(error);
     });
     event.preventDefault();
