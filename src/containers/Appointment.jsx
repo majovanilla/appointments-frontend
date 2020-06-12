@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import appClasses from '../styles/appointment.module.scss';
 import setAppointments from '../actions/apptActions';
 
@@ -79,7 +80,9 @@ export class Appointment extends Component {
   }
 
   render() {
-    const { date, time } = this.state;
+    const { date, time, tutorId } = this.state;
+
+    if (!tutorId) { return (<Redirect to="/tutors" />); }
 
     return (
       <div className={appClasses.mainDiv}>

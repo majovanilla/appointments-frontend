@@ -10,6 +10,7 @@ import Appointment from './Appointment';
 import Tutor from '../components/Tutor';
 import TutorList from '../components/TutorList';
 import User from '../components/User';
+import Catch404 from '../components/Catch404';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 
@@ -25,9 +26,10 @@ function App() {
           <Route exact path="/auth/login" component={Login} />
           <Route exact path="/appointments" component={AppointmentList} />
           <Route exact path="/appointments/new" component={Appointment} />
-          <Route exact path="/tutors/" component={TutorList} />
+          <Route exact path="/tutors" component={TutorList} />
           <Route exact path="/tutors/:id" component={Tutor} />
           <Route exact path="/users/:id" component={User} />
+          <Route component={Catch404} />
         </Switch>
       </Router>
     </div>
