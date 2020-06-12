@@ -52,8 +52,7 @@ export class Appointment extends Component {
     const { history } = this.props;
     const authToken = localStorage.getItem('token');
 
-    const cors = 'https://cors-anywhere.herokuapp.com/';
-    axios.post(`${cors}https://appointments-api-majovanilla.herokuapp.com/appointments/new`,
+    axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
       data,
       {
         headers: {

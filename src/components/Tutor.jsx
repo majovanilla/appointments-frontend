@@ -20,8 +20,7 @@ export default class Tutor extends Component {
   componentDidMount() {
     const { id } = this.state;
     if (this.token) {
-      const cors = 'https://cors-anywhere.herokuapp.com/';
-      axios.post(`${cors}https://appointments-api-majovanilla.herokuapp.com/tutors/${id}`, {
+      axios.get(`https://appointments-api-majovanilla.herokuapp.com/tutors/${id}`, {
         headers: { Authorization: `Bearer ${this.token}` },
       }).then(response => {
         this.setState({ tutor: response.data });

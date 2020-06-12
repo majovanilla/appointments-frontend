@@ -21,8 +21,7 @@ export class TutorList extends Component {
 
   componentDidMount() {
     if (this.token) {
-      const cors = 'https://cors-anywhere.herokuapp.com/';
-      axios.post(`${cors}https://appointments-api-majovanilla.herokuapp.com/tutors`, {
+      axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
         headers: { Authorization: `Bearer ${this.token}` },
       }).then(response => {
         const { setTutors } = this.props;
