@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -20,14 +21,13 @@ export class TutorList extends Component {
 
   componentDidMount() {
     if (this.token) {
-    axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
+      axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
         headers: { Authorization: `Bearer ${this.token}` },
       }).then(response => {
         const { setTutors } = this.props;
         setTutors(response.data);
         this.setState({ tutors: response.data });
       }).catch(error => {
-      // eslint-disable-next-line no-alert
         alert(error);
       });
     }
