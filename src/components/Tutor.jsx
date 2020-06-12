@@ -20,7 +20,7 @@ export default class Tutor extends Component {
   componentDidMount() {
     const { id } = this.state;
     if (this.token) {
-      axios.get(`http://localhost:3000/tutors/${id}`, {
+    axios.get(`https://appointments-api-majovanilla.herokuapp.com/tutors/${this.state.id}`, {
         headers: { Authorization: `Bearer ${this.token}` },
       }).then(response => {
         this.setState({ tutor: response.data });

@@ -39,6 +39,7 @@ class Login extends Component {
       const { setToken } = this.props;
       setToken(response);
     }).catch(error => {
+      // eslint-disable-next-line no-alert
       alert(error);
     });
     event.preventDefault();

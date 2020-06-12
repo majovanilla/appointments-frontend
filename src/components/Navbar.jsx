@@ -44,8 +44,8 @@ export default class Navbar extends Component {
         </button>
         <div className={`${navClasses.navToggle} ${visibleClass}`}>
           <ul className={navClasses.navMenu}>
-            <li className={navClasses.navItem}><Link to="/" className={navClasses.navItem}>Tutors</Link></li>
-            <li className={navClasses.navItem}><Link to="/" className={navClasses.navItem} onClick={this.handleLogOut}>Log out</Link></li>
+            <li className={navClasses.navItem}><Link to="/tutors" className={navClasses.navItem}>Tutors</Link></li>
+            <li className={navClasses.navItem}><Link to="/auth/login" className={navClasses.navItem} onClick={this.handleLogOut}>Log out</Link></li>
             <li className={navClasses.navItem}><Link to="/appointments" className={navClasses.navItem}>Appointments</Link></li>
           </ul>
           <div className={navClasses.socialDiv}>
