@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -12,27 +12,36 @@ export class TutorList extends Component {
   constructor(props) {
     super(props);
 
+    this.token = localStorage.getItem('token');
     this.state = {
       tutors: [],
     };
   }
 
   componentDidMount() {
-    const authToken = localStorage.getItem('token');
-    axios.get('http://localhost:3000/tutors', {
-      headers: { Authorization: `Bearer ${authToken}` },
-    }).then(response => {
-      const { setTutors } = this.props;
-      setTutors(response.data);
-      this.setState({ tutors: response.data });
-    }).catch(error => {
+    if (this.token) {
+      axios.get('http://localhost:3000/tutors', {
+        headers: { Authorization: `Bearer ${this.token}` },
+      }).then(response => {
+        const { setTutors } = this.props;
+        setTutors(response.data);
+        this.setState({ tutors: response.data });
+      }).catch(error => {
       // eslint-disable-next-line no-alert
-      alert(error);
-    });
+        alert(error);
+      });
+    }
   }
 
   render() {
     const { tutors } = this.state;
+
+    if (!this.token) {
+      alert('Please login first');
+      return (
+        <Redirect to="/" />
+      );
+    }
 
     return (
       <div className={tutorClasses.mainDiv}>

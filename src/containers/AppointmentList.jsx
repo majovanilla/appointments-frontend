@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import appClasses from '../styles/appointmentList.module.scss';
@@ -32,6 +33,10 @@ export class AppointmentList extends Component {
   render() {
     const { tutors } = this.props;
     const { appointments } = this.state;
+
+    const token = localStorage.getItem('token');
+
+    if (!token) { return (<Redirect to="/" />); }
     return (
       <div className={appClasses.mainDiv}>
         <div className={appClasses.bgImage} />

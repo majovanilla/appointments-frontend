@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import tutorClasses from '../styles/tutor.module.scss';
 
@@ -29,7 +29,9 @@ export default class Tutor extends Component {
 
   render() {
     const { tutor } = this.state;
+    const token = localStorage.getItem('token');
 
+    if (!token) { return (<Redirect to="/" />); }
     return (
       <div className={tutorClasses.mainDiv}>
         <div className={tutorClasses.tutorImgDiv}>
