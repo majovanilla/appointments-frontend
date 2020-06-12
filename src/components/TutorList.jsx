@@ -45,15 +45,16 @@ export class TutorList extends Component {
 
     return (
       <div className={tutorClasses.mainDiv}>
-        <div className={tutorClasses.prevButton}>
-          <span>&lt;</span>
-        </div>
+
         <div className={tutorClasses.title}>
           <h1 className={tutorClasses.mainTitle}>Best Tutors</h1>
           <h2 className={tutorClasses.subTitle}>Choose your teacher</h2>
           <div className={tutorClasses.divisor}>
             <p>************</p>
           </div>
+        </div>
+        <div className={tutorClasses.prevButton}>
+          <span>&lt;</span>
         </div>
         {tutors.map(tutor => (
           <div key={tutor.id} className={tutorClasses.tutorDiv}>

@@ -14,14 +14,13 @@ import Catch404 from '../components/Catch404';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 
-
 function App() {
   return (
     <div className="App">
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/auth/signup" component={Signup} />
           <Route exact path="/auth/login" component={Login} />
           <Route exact path="/appointments" component={AppointmentList} />

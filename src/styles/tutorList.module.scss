@@ -3,7 +3,7 @@
 .mainDiv {
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
-  grid-template-rows: [title] 15% [tutordiv] 85%;
+  grid-template-rows: [title] 15% [tutordiv] auto;
   margin: auto;
   padding: 100px 0;
   height: 74%;
@@ -92,7 +92,7 @@
 
 .about {
   overflow: hidden;
-  height: 12.8rem;
+  height: 7.9rem;
   line-height: 1rem;
   text-align: center;
   font-size: 0.9rem;
