@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -9,34 +10,37 @@ export class AppointmentList extends Component {
   constructor(props) {
     super(props);
 
+    this.token = localStorage.getItem('token');
     this.state = {
       appointments: [],
     };
   }
 
   componentDidMount() {
-    const authToken = localStorage.getItem('token');
-    axios.get('http://localhost:3000/appointments',
-      {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
-      .then(response => {
-        this.setState({ appointments: response.data });
-      }).catch(error => {
-        // eslint-disable-next-line no-alert
-        alert(error);
-      });
+    if (this.token) {
+      axios.get('http://localhost:3000/appointments',
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then(response => {
+          this.setState({ appointments: response.data });
+        }).catch(error => {
+          alert(error);
+        });
+    }
   }
 
   render() {
     const { tutors } = this.props;
     const { appointments } = this.state;
 
-    const token = localStorage.getItem('token');
+    if (!this.token) {
+      alert('Please login first');
+      return (<Redirect to="/" />);
+    }
 
-    if (!token) { return (<Redirect to="/" />); }
     return (
       <div className={appClasses.mainDiv}>
         <div className={appClasses.bgImage} />
