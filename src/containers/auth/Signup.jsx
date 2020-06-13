@@ -31,8 +31,7 @@ class Signup extends Component {
       name, email, password,
     } = this.state;
 
-    const cors = 'https://cors-anywhere.herokuapp.com/';
-    axios.post(`${cors}https://appointments-api-majovanilla.herokuapp.com/signup`, {
+    axios.post('https://appointments-api-majovanilla.herokuapp.com/signup', {
       name,
       email,
       password,
