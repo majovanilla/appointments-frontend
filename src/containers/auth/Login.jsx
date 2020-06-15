@@ -73,12 +73,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // setToken: response => dispatch(setToken(response.data.auth_token)),
   loginCall: (email, password) => dispatch(loginCall(email, password)),
 });
 
 Login.propTypes = {
-  // setToken: PropTypes.func.isRequired,
   loginCall: PropTypes.func.isRequired,
 };
 

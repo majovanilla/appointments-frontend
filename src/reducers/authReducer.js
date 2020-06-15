@@ -1,21 +1,8 @@
-const initState = {
-  authToken: '',
-  fetching: false,
-  loggedIn: false,
-  message: '',
-};
+import { initAuthState } from '../helpers/initStates';
 
-const authReducer = (state = initState, action) => {
+const authReducer = (state = initAuthState, action) => {
   let token;
-  // console.log(action.authToken)
   switch (action.type) {
-    case 'SET_TOKEN':
-      token = localStorage.setItem('token', action.authToken);
-      return {
-        ...state,
-        authToken: token,
-      };
-
     case 'REQUEST_LOGIN':
       return {
         ...state,
@@ -26,8 +13,8 @@ const authReducer = (state = initState, action) => {
       token = localStorage.setItem('token', action.authToken);
       return {
         ...state,
-        fetching: false,
         authToken: token,
+        fetching: false,
       };
 
     case 'RECEIVE_LOGIN_ERROR':

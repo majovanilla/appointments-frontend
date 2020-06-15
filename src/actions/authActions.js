@@ -1,47 +1,35 @@
 import axios from 'axios';
 
-function setToken(authToken) {
-  return {
-    type: 'SET_TOKEN',
-    authToken,
-  };
-}
-
-function requestLogin() {
+export function requestLogin() {
   return {
     type: 'REQUEST_LOGIN',
   };
 }
 
-function receiveLogin(token) {
+export function receiveLogin(authToken) {
   return {
     type: 'RECEIVE_LOGIN',
-    token,
+    authToken,
   };
 }
 
-function receiveLoginError(error) {
+export function receiveLoginError(error) {
   return {
     type: 'RECEIVE_LOGIN_ERROR',
     error,
   };
 }
 
-function loginCall(email, password) {
+export function loginCall(email, password) {
   return dispatch => {
     axios.post('https://appointments-api-majovanilla.herokuapp.com/auth/login', {
       email,
       password,
     }).then(response => {
-      dispatch(setToken(response.data.auth_token));
+      dispatch(receiveLogin(response.data.auth_token));
     }).catch(error => {
       dispatch(receiveLoginError(error.response.data.message));
       alert(error.response.data.message);
-      // return Promise.resolve;
     });
   };
 }
-
-export {
-  setToken, requestLogin, receiveLogin, receiveLoginError, loginCall,
-};
