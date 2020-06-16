@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+export function setToken(authToken) {
+  return {
+    type: 'SET_TOKEN',
+    authToken,
+  };
+}
+
 export function requestLogin() {
   return {
     type: 'REQUEST_LOGIN',

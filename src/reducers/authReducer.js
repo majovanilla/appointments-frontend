@@ -8,6 +8,12 @@ const authReducer = (state = initAuthState, action) => {
         fetching: true,
       };
 
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        authToken: action.authToken,
+      };
+
     case 'RECEIVE_LOGIN':
       localStorage.setItem('token', action.authToken);
       return {
