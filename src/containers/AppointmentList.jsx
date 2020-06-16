@@ -33,7 +33,7 @@ export class AppointmentList extends Component {
     const { appointments } = this.state;
 
     if (!this.token) {
-      alert('Please login first');
+      // alert('Please login first');
       return (<Redirect to="/" />);
     }
 

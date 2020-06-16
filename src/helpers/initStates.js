@@ -1,5 +1,5 @@
 export const initTutorsState = {
-  tutors: [
+  list: [
     {
       id: 1,
       name: 'Juana Pérez',

@@ -34,7 +34,7 @@ export default class Tutor extends Component {
     const { tutor } = this.state;
 
     if (!this.token) {
-      alert('Please login first');
+      // alert('Please login first');
       return (
         <Redirect to="/" />
       );

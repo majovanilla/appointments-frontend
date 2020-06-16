@@ -3,45 +3,33 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import tutorClasses from '../styles/tutorList.module.scss';
 import twitter from '../img/twitter.png';
 import fb from '../img/fb.png';
-import setTutors from '../actions/tutorsActions';
+import { tutorsCall, receiveTutors } from '../actions/tutorsActions';
+import { setToken } from '../actions/authActions';
 
 export class TutorList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.token = localStorage.getItem('token');
-    this.state = {
-      tutors: [],
-    };
-  }
-
   componentDidMount() {
-    if (this.token) {
-      axios.get('https://appointments-api-majovanilla.herokuapp.com/tutors', {
-        headers: { Authorization: `Bearer ${this.token}` },
-      }).then(response => {
-        const { setTutors } = this.props;
-        setTutors(response.data);
-        this.setState({ tutors: response.data });
-      }).catch(error => {
-        alert(error);
-      });
+    const { tutorsCall, setToken } = this.props;
+    setToken(localStorage.getItem('token'));
+    const { authToken } = this.props;
+    if (authToken) {
+      tutorsCall(authToken);
     }
   }
 
   render() {
-    const { tutors } = this.state;
+    const authToken = localStorage.getItem('token');
 
-    if (!this.token) {
+    if (!authToken) {
       alert('Please login first');
       return (
         <Redirect to="/" />
       );
     }
+
+    const { tutors } = this.props;
 
     return (
       <div className={tutorClasses.mainDiv}>
@@ -84,14 +72,21 @@ export class TutorList extends Component {
 
 const mapStateToProps = state => ({
   tutors: state.tutors.list,
+  fetching: state.fetching,
+  authToken: state.auth.authToken,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setTutors: response => dispatch(setTutors(response)),
+  tutorsCall: token => dispatch(tutorsCall(token)),
+  receiveTutors: response => dispatch(receiveTutors(response.data)),
+  setToken: token => dispatch(setToken(token)),
 });
 
 TutorList.propTypes = {
-  setTutors: PropTypes.func.isRequired,
+  tutorsCall: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
+  authToken: PropTypes.string.isRequired,
+  tutors: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorList);
