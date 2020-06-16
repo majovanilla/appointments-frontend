@@ -21,6 +21,26 @@ export function receiveTutorsError(error) {
   };
 }
 
+export function getTutor() {
+  return {
+    type: 'GET_TUTOR',
+  };
+}
+
+export function getTutorSuccess(tutor) {
+  return {
+    type: 'GET_TUTOR_SUCCESS',
+    tutor,
+  };
+}
+
+export function getTutorError(error) {
+  return {
+    type: 'GET_TUTOR_ERROR',
+    error,
+  };
+}
+
 export function tutorsCall(token) {
   return dispatch => {
     dispatch(requestTutors());
@@ -30,6 +50,19 @@ export function tutorsCall(token) {
       dispatch(receiveTutors(response.data));
     }).catch(error => {
       dispatch(receiveTutorsError(error));
+    });
+  };
+}
+
+export function fetchTutor(id, token) {
+  return dispatch => {
+    dispatch(getTutor());
+    return axios.get(`${PROD_URL}/tutors/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(response => {
+      dispatch(getTutorSuccess(response.data));
+    }).catch(error => {
+      dispatch(getTutorError(error));
     });
   };
 }

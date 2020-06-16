@@ -33,6 +33,7 @@ export const initTutorsState = {
   ],
   fetching: false,
   message: '',
+  currentTutor: {},
 };
 
 export const initAuthState = {
