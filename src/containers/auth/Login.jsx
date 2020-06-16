@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { loginCall } from '../../actions/authActions';
@@ -32,8 +31,9 @@ class Login extends Component {
 
     const { loginCall } = this.props;
     event.preventDefault();
-    loginCall(email, password);
-    this.setState({ email: '', password: '' });
+    loginCall(email, password).then(() => {
+      this.setState({ email: '', password: '' });
+    });
   }
 
   render() {
@@ -67,7 +67,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  authToken: state.auth.authToken,
   message: state.auth.message,
   fetching: state.auth.fetching,
 });

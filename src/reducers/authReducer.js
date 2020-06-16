@@ -1,7 +1,6 @@
 import { initAuthState } from '../helpers/initStates';
 
 const authReducer = (state = initAuthState, action) => {
-  let token;
   switch (action.type) {
     case 'REQUEST_LOGIN':
       return {
@@ -10,10 +9,10 @@ const authReducer = (state = initAuthState, action) => {
       };
 
     case 'RECEIVE_LOGIN':
-      token = localStorage.setItem('token', action.authToken);
+      localStorage.setItem('token', action.authToken);
       return {
         ...state,
-        authToken: token,
+        authToken: action.authToken,
         fetching: false,
       };
 

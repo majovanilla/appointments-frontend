@@ -31,11 +31,12 @@ export const initTutorsState = {
       experience: '4 years',
     },
   ],
+  fetching: false,
+  message: '',
 };
 
 export const initAuthState = {
   authToken: '',
   fetching: false,
-  loggedIn: false,
   message: '',
 };
