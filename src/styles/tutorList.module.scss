@@ -103,20 +103,6 @@ a {
   color: silver;
 }
 
-.nextButton,
-.prevButton {
-  align-self: center;
-  padding: 10px 20px;
-  text-align: center;
-  color: white;
-  font-weight: 700;
-  font-size: 2.5rem;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .nextButton {
   grid-row: tutorDiv;
   grid-column: space2;
@@ -131,4 +117,18 @@ a {
   background: $gray-color;
   border-radius: 0 120px 120px 0;
   margin-right: 30px;
+}
+
+.nextButton,
+.prevButton {
+  align-self: center;
+  padding: 10px 20px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
