@@ -9,13 +9,13 @@ export const checkToken = () => {
   return false;
 };
 
-export const setToken = token => {
+export const saveToken = token => {
   const NOW = Math.round((new Date()).getTime() / 1000);
 
   const tokenObj = {
-    token,
+    token: token,
     expiresAt: NOW + 86400,
   };
 
-  localStorage.setItem('token', JSON.stringify(tokenObj));
+  localStorage.setItem('tokenObj', JSON.stringify(tokenObj));
 };

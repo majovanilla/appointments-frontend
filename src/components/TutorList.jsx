@@ -8,11 +8,13 @@ import twitter from '../img/twitter.png';
 import fb from '../img/fb.png';
 import { tutorsCall, receiveTutors } from '../actions/tutorsActions';
 import { setToken } from '../actions/authActions';
+import { checkToken, saveToken } from '../helpers/token';
 
 export class TutorList extends Component {
   componentDidMount() {
     const { tutorsCall, setToken } = this.props;
-    setToken(localStorage.getItem('token'));
+    const tokenObj = JSON.parse(localStorage.getItem('tokenObj'));
+    setToken(tokenObj.token);
     const { authToken } = this.props;
     if (authToken) {
       tutorsCall(authToken);
@@ -20,9 +22,9 @@ export class TutorList extends Component {
   }
 
   render() {
-    const authToken = localStorage.getItem('token');
+    const validToken = checkToken();
 
-    if (!authToken) {
+    if (validToken === false) {
       alert('Please login first');
       return (
         <Redirect to="/" />
