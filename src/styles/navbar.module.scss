@@ -33,6 +33,7 @@
 .hambugerButton {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .navToggle {
@@ -77,8 +78,10 @@
 
 .socialIcon {
   width: 20px;
+  transition: ease-in-out;
 
   &:hover {
-    opacity: 60%;
+    opacity: 80%;
+    width: 22px;
   }
 }

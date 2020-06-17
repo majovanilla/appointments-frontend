@@ -32,7 +32,7 @@ export class AppointmentList extends Component {
   }
 
   render() {
-    const { fetching } = this.props;
+    const { fetching, tutors } = this.props;
     if (fetching === true) {
       return (
         <Loader
@@ -83,6 +83,7 @@ const mapStateToProps = state => ({
   authToken: state.auth.authToken,
   appointments: state.appt.list,
   fetching: state.appt.fetching,
+  tutors: state.tutors.list,
 });
 
 const mapDispatchToProps = dispatch => ({

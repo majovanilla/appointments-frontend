@@ -71,8 +71,11 @@ select,
   background: white;
   text-align: center;
   color: $green-color;
-  margin-top: 30px;
   border-style: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .input {
@@ -84,5 +87,9 @@ select,
 
   &__small {
     width: 100px;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }

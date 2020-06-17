@@ -7,6 +7,7 @@ import twitter from '../img/twitter.png';
 import google from '../img/google.png';
 import pinterest from '../img/pinterest.png';
 import vimeo from '../img/vimeo.png';
+import { checkToken } from '../helpers/token';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -20,20 +21,22 @@ export default class Navbar extends Component {
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
-  handleToggle(event) {
+  handleToggle() {
     const { visible } = this.state;
-    if (event.target.alt === 'toggle icon') {
-      this.setState({ visible: !visible });
-    }
+    this.setState({ visible: !visible });
   }
 
   handleLogOut() {
     const { visible } = this.state;
-    localStorage.removeItem('token');
+    localStorage.removeItem('tokenObj');
     this.setState({ visible: !visible });
   }
 
   render() {
+    const validToken = checkToken();
+    if (validToken === false) {
+      return (<div />);
+    }
     const { visible } = this.state;
     const visibleClass = visible ? navClasses.navToggle__visible : navClasses.navToggle__invisible;
 
@@ -44,9 +47,9 @@ export default class Navbar extends Component {
         </button>
         <div className={`${navClasses.navToggle} ${visibleClass}`}>
           <ul className={navClasses.navMenu}>
-            <li className={navClasses.navItem}><Link to="/tutors" className={navClasses.navItem}>Tutors</Link></li>
+            <li className={navClasses.navItem}><Link to="/tutors" className={navClasses.navItem} onClick={this.handleToggle}>Tutors</Link></li>
             <li className={navClasses.navItem}><Link to="/auth/login" className={navClasses.navItem} onClick={this.handleLogOut}>Log out</Link></li>
-            <li className={navClasses.navItem}><Link to="/appointments" className={navClasses.navItem}>Appointments</Link></li>
+            <li className={navClasses.navItem}><Link to="/appointments" className={navClasses.navItem} onClick={this.handleToggle}>Appointments</Link></li>
           </ul>
           <div className={navClasses.socialDiv}>
             <img className={navClasses.socialIcon} src={twitter} alt="twitter logo" />

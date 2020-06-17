@@ -108,6 +108,10 @@
   color: white;
   font-weight: 700;
   font-size: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .nextButton {

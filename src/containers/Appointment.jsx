@@ -96,8 +96,8 @@ export class Appointment extends Component {
             dateFormat="MMMM d, yyyy h:mm aa"
             shouldCloseOnSelect
           />
+          <button type="submit" className={appClasses.bookButton} onClick={this.handleSubmit}>Book Now</button>
         </div>
-        <button type="submit" className={appClasses.bookButton} onClick={this.handleSubmit}>Book Now</button>
       </div>
     );
   }
