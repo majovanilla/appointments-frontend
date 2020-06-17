@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import tutorClasses from '../styles/tutor.module.scss';
 import { setToken } from '../actions/authActions';
 import { fetchTutor } from '../actions/tutorsActions';
+import { checkToken } from '../helpers/token';
 
 export class Tutor extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ export class Tutor extends Component {
   componentDidMount() {
     const { id } = this.state;
     const { setToken, fetchTutor } = this.props;
-    const token = localStorage.getItem('token');
+    const tokenObj = JSON.parse(localStorage.getItem('tokenObj'));
+    const { token } = tokenObj;
     if (token) {
       fetchTutor(id, token).then(() => {
         const { currentTutor } = this.props;
@@ -32,9 +34,9 @@ export class Tutor extends Component {
   }
 
   render() {
-    const token = localStorage.getItem('token');
+    const validToken = checkToken();
     const { tutor } = this.state;
-    if (!token) {
+    if (!validToken) {
       alert('Please login first');
       return (
         <Redirect to="/" />

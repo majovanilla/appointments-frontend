@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { loginCall } from '../../actions/authActions';
 import loginClasses from '../../styles/auth.module.scss';
+import { checkToken } from '../../helpers/token';
 
 class Login extends Component {
   constructor(props) {
@@ -41,8 +42,8 @@ class Login extends Component {
       email, password,
     } = this.state;
 
-    const token = localStorage.getItem('token');
-    if (token) { return (<Redirect to="/tutors" />); }
+    const validToken = checkToken();
+    if (validToken === true) { return (<Redirect to="/tutors" />); }
 
     return (
       <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>

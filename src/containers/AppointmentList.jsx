@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner';
 import appClasses from '../styles/appointmentList.module.scss';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { apptCall } from '../actions/apptActions';
+import { checkToken } from '../helpers/token';
 
 export class AppointmentList extends Component {
   constructor(props) {
@@ -18,9 +19,10 @@ export class AppointmentList extends Component {
   }
 
   componentDidMount() {
-    // const tokenObj = JSON.parse(localStorage.getItem('tokenObj'));
-    const token = localStorage.getItem('token');
-    if (token) {
+    const validToken = checkToken();
+    const tokenObj = JSON.parse(localStorage.getItem('tokenObj'));
+    const { token } = tokenObj;
+    if (validToken) {
       const { apptCall } = this.props;
       apptCall(token).then(() => {
         const { appointments } = this.props;
@@ -43,8 +45,8 @@ export class AppointmentList extends Component {
       );
     }
 
-    const token = localStorage.getItem('token');
-    if (!token) {
+    const validToken = checkToken();
+    if (!validToken) {
       // alert('Please login first');
       return (<Redirect to="/" />);
     }

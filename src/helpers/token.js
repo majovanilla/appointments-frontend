@@ -1,20 +1,21 @@
 export const checkToken = () => {
-  const NOW = Math.round((new Date()).getTime() / 1000);
+  const NOW = Date.now();
 
   const cachedToken = JSON.parse(localStorage.getItem('tokenObj'));
-  if (cachedToken && cachedToken.expiresAt > NOW) {
+  if (cachedToken && cachedToken.expiresAt < NOW) {
     localStorage.removeItem('tokenObj');
-    return true;
+    return false;
   }
-  return false;
+  if (!cachedToken) return false;
+  return true;
 };
 
 export const saveToken = token => {
-  const NOW = Math.round((new Date()).getTime() / 1000);
+  const NOW = Date.now();
 
   const tokenObj = {
-    token: token,
-    expiresAt: NOW + 86400,
+    token,
+    expiresAt: NOW + 86400000,
   };
 
   localStorage.setItem('tokenObj', JSON.stringify(tokenObj));

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import appClasses from '../styles/appointment.module.scss';
 import { postApptCall } from '../actions/apptActions';
+import { checkToken } from '../helpers/token';
 
 export class Appointment extends Component {
   constructor(props) {
@@ -49,9 +50,11 @@ export class Appointment extends Component {
     };
 
     const { history, postAppt } = this.props;
-    const authToken = localStorage.getItem('token');
-    if (authToken) {
-      postAppt(authToken, data).then(() => {
+    const validToken = checkToken();
+    if (validToken) {
+      const tokenObj = JSON.parse(localStorage.getItem('tokenObj'));
+      const { token } = tokenObj;
+      postAppt(token, data).then(() => {
         history.push('/appointments');
       });
     }
