@@ -8,7 +8,7 @@ import twitter from '../img/twitter.png';
 import fb from '../img/fb.png';
 import { tutorsCall, receiveTutors } from '../actions/tutorsActions';
 import { setToken } from '../actions/authActions';
-import { checkToken, saveToken } from '../helpers/token';
+import { checkToken } from '../helpers/token';
 
 export class TutorList extends Component {
   componentDidMount() {
@@ -50,14 +50,14 @@ export class TutorList extends Component {
           <div key={tutor.id} className={tutorClasses.tutorDiv}>
             <Link to={`/tutors/${tutor.id}`}>
               <img className={tutorClasses.tutorPic} src={tutor.img} alt="Tutor profile" />
-            </Link>
-            <div className={tutorClasses.tutorInfo}>
-              <p className={tutorClasses.tutorName}>{tutor.name}</p>
-              <div className={tutorClasses.divisor}>
-                <p>************</p>
+              <div className={tutorClasses.tutorInfo}>
+                <p className={tutorClasses.tutorName}>{tutor.name}</p>
+                <div className={tutorClasses.divisor}>
+                  <p>************</p>
+                </div>
+                <p className={tutorClasses.about}>{tutor.about}</p>
               </div>
-              <p className={tutorClasses.about}>{tutor.about}</p>
-            </div>
+            </Link>
             <div className={tutorClasses.socialDiv}>
               <img className={tutorClasses.socialIcon} src={twitter} alt="twitter logo" />
               <img className={tutorClasses.socialIcon} src={fb} alt="Facebook logo" />
