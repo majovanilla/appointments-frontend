@@ -1,5 +1,9 @@
 @import 'variables';
 
+a {
+  text-decoration: none;
+}
+
 .mainDiv {
   display: grid;
   grid-template-columns: [space1] 12% [tutor1] 25% [tutor2] 25% [tutor3] 25% [space2] auto;
@@ -97,17 +101,6 @@
   text-align: center;
   font-size: 0.9rem;
   color: silver;
-  margin-bottom: 20px;
-}
-
-.nextButton,
-.prevButton {
-  align-self: center;
-  padding: 10px 20px;
-  text-align: center;
-  color: white;
-  font-weight: 700;
-  font-size: 2.5rem;
 }
 
 .nextButton {
@@ -124,4 +117,18 @@
   background: $gray-color;
   border-radius: 0 120px 120px 0;
   margin-right: 30px;
+}
+
+.nextButton,
+.prevButton {
+  align-self: center;
+  padding: 10px 20px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

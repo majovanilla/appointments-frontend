@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { setToken } from '../../actions/authActions';
+import { signUpCall } from '../../actions/authActions';
+// import { setToken } from '../../actions/authActions';
 import signupClasses from '../../styles/auth.module.scss';
+import { checkToken } from '../../helpers/token';
 
 class Signup extends Component {
   constructor(props) {
@@ -27,21 +28,12 @@ class Signup extends Component {
   }
 
   handleSubmit(event) {
-    const {
-      name, email, password,
-    } = this.state;
+    const { name, email, password } = this.state;
 
-    axios.post('https://appointments-api-majovanilla.herokuapp.com/signup', {
-      name,
-      email,
-      password,
-    }).then(response => {
-      const { setToken } = this.props;
-      setToken(response);
-    }).catch(error => {
-      // eslint-disable-next-line no-alert
-      alert(error);
-    });
+    const data = { name, email, password };
+
+    const { signUpCall } = this.props;
+    signUpCall(data);
     event.preventDefault();
   }
 
@@ -50,8 +42,8 @@ class Signup extends Component {
       name, email, password,
     } = this.state;
 
-    const token = localStorage.getItem('token');
-    if (token) { return (<Redirect to="/tutors" />); }
+    const validToken = checkToken();
+    if (validToken) { return (<Redirect to="/tutors" />); }
 
     return (
       <div className={`${signupClasses.mainDiv} ${signupClasses.mainDiv__yellow}`}>
@@ -81,11 +73,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setToken: response => dispatch(setToken(response.data.auth_token)),
+  signUpCall: data => dispatch(signUpCall(data)),
 });
 
 Signup.propTypes = {
-  setToken: PropTypes.func.isRequired,
+  signUpCall: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

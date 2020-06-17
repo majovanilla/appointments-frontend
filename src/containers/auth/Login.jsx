@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { setToken } from '../../actions/authActions';
+import { loginCall } from '../../actions/authActions';
 import loginClasses from '../../styles/auth.module.scss';
+import { checkToken } from '../../helpers/token';
 
 class Login extends Component {
   constructor(props) {
@@ -26,30 +26,23 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    const {
-      email, password,
-    } = this.state;
+    const { email, password } = this.state;
+    const data = { email, password };
 
-
-    axios.post('https://appointments-api-majovanilla.herokuapp.com/auth/login', {
-      email,
-      password,
-    }).then(response => {
-      const { setToken } = this.props;
-      setToken(response);
-    }).catch(error => {
-      // eslint-disable-next-line no-alert
-      alert(error);
-    });
+    const { loginCall } = this.props;
     event.preventDefault();
+    loginCall(data).then(() => {
+      this.setState({ email: '', password: '' });
+    });
   }
 
   render() {
     const {
       email, password,
     } = this.state;
-    const token = localStorage.getItem('token');
-    if (token) { return (<Redirect to="/tutors" />); }
+
+    const validToken = checkToken();
+    if (validToken === true) { return (<Redirect to="/tutors" />); }
 
     return (
       <div className={`${loginClasses.mainDiv} ${loginClasses.mainDiv__yellow}`}>
@@ -74,15 +67,16 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  authToken: state.auth.authToken,
+  message: state.auth.message,
+  fetching: state.auth.fetching,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setToken: response => dispatch(setToken(response.data.auth_token)),
+  loginCall: (email, password) => dispatch(loginCall(email, password)),
 });
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
+  loginCall: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
