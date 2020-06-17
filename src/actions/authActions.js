@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { PROD_URL } from '../helpers/constants';
 
 export function setToken(authToken) {
   return {
@@ -27,17 +28,46 @@ export function receiveLoginError(error) {
   };
 }
 
-export function loginCall(email, password) {
+export function requestSignUp() {
+  return {
+    type: 'REQUEST_SIGNUP',
+  };
+}
+
+export function receiveSignUp(authToken) {
+  return {
+    type: 'RECEIVE_SIGNUP',
+    authToken,
+  };
+}
+
+export function receiveSignUpError(error) {
+  return {
+    type: 'RECEIVE_SIGNUP_ERROR',
+    error,
+  };
+}
+
+export function loginCall(loginInfo) {
   return dispatch => {
     dispatch(requestLogin);
-    return axios.post('https://appointments-api-majovanilla.herokuapp.com/auth/login', {
-      email,
-      password,
-    }).then(response => {
-      dispatch(receiveLogin(response.data.auth_token));
-    }).catch(error => {
-      dispatch(receiveLoginError(error.response.data.message));
-      // alert(error.response.data.message);
-    });
+    return axios.post(`${PROD_URL}/auth/login`, loginInfo)
+      .then(response => {
+        dispatch(receiveLogin(response.data.auth_token));
+      }).catch(error => {
+        dispatch(receiveLoginError(error.response.data.message));
+      });
+  };
+}
+
+export function signUpCall(signUpInfo) {
+  return dispatch => {
+    dispatch(requestSignUp);
+    return axios.post(`${PROD_URL}/signup`, signUpInfo)
+      .then(response => {
+        dispatch(receiveSignUp(response.data.auth_token));
+      }).catch(error => {
+        dispatch(receiveSignUpError(error.response.data.message));
+      });
   };
 }

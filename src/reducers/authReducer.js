@@ -30,6 +30,27 @@ const authReducer = (state = initAuthState, action) => {
         message: action.error,
       };
 
+    case 'REQUEST_SIGNUP':
+      return {
+        ...state,
+        fetching: true,
+      };
+
+    case 'RECEIVE_SIGNUP':
+      saveToken(action.authToken);
+      return {
+        ...state,
+        authToken: action.authToken,
+        fetching: false,
+      };
+
+    case 'RECEIVE_SIGNUP_ERROR':
+      return {
+        ...state,
+        fetching: false,
+        message: action.error,
+      };
+
     default:
       return state;
   }

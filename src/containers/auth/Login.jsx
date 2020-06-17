@@ -26,13 +26,12 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    const {
-      email, password,
-    } = this.state;
+    const { email, password } = this.state;
+    const data = { email, password };
 
     const { loginCall } = this.props;
     event.preventDefault();
-    loginCall(email, password).then(() => {
+    loginCall(data).then(() => {
       this.setState({ email: '', password: '' });
     });
   }
