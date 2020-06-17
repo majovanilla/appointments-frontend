@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import appClasses from '../styles/appointment.module.scss';
-import setAppointments from '../actions/apptActions';
+import { postApptCall } from '../actions/apptActions';
 
 export class Appointment extends Component {
   constructor(props) {
@@ -49,24 +48,13 @@ export class Appointment extends Component {
       tutor_id: tutorId,
     };
 
-    const { history } = this.props;
+    const { history, postAppt } = this.props;
     const authToken = localStorage.getItem('token');
-
-    axios.post('https://appointments-api-majovanilla.herokuapp.com/appointments/new',
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
-      .then(response => {
-        const { setAppointment } = this.props;
-        setAppointment(response.data);
+    if (authToken) {
+      postAppt(authToken, data).then(() => {
         history.push('/appointments');
-      }).catch(error => {
-        // eslint-disable-next-line no-alert
-        alert(error);
       });
+    }
     event.preventDefault();
   }
 
@@ -93,7 +81,6 @@ export class Appointment extends Component {
             <option value="mexico city">Mexico City</option>
             <option value="rwanda">Rwanda</option>
           </select>
-          {/* <div className={appClasses.datePickerDiv}> */}
           <DatePicker
             name="date"
             className={`${appClasses.datePicker} ${appClasses.input} `}
@@ -106,7 +93,6 @@ export class Appointment extends Component {
             dateFormat="MMMM d, yyyy h:mm aa"
             shouldCloseOnSelect
           />
-          {/* </div> */}
         </div>
         <button type="submit" className={appClasses.bookButton} onClick={this.handleSubmit}>Book Now</button>
       </div>
@@ -120,7 +106,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setAppointment: appointments => dispatch(setAppointments(appointments)),
+  postAppt: (token, data) => dispatch(postApptCall(token, data)),
 });
 
 Appointment.propTypes = {
@@ -130,7 +116,7 @@ Appointment.propTypes = {
       tutorId: PropTypes.number.isRequired,
     }),
   }).isRequired,
-  setAppointment: PropTypes.func.isRequired,
+  postAppt: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Appointment);

@@ -2,41 +2,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import Loader from 'react-loader-spinner';
 import appClasses from '../styles/appointmentList.module.scss';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { apptCall } from '../actions/apptActions';
 
 export class AppointmentList extends Component {
   constructor(props) {
     super(props);
 
-    this.token = localStorage.getItem('token');
     this.state = {
       appointments: [],
     };
   }
 
   componentDidMount() {
-    if (this.token) {
-      axios.get('https://appointments-api-majovanilla.herokuapp.com/appointments', {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }).then(response => {
-        this.setState({ appointments: response.data });
-      }).catch(error => {
-        alert(error);
+    // const tokenObj = JSON.parse(localStorage.getItem('tokenObj'));
+    const token = localStorage.getItem('token');
+    if (token) {
+      const { apptCall } = this.props;
+      apptCall(token).then(() => {
+        const { appointments } = this.props;
+        this.setState({ appointments });
       });
     }
   }
 
   render() {
-    const { appointments } = this.state;
+    const { fetching } = this.props;
+    if (fetching === true) {
+      return (
+        <Loader
+          className="spinner"
+          type="Circles"
+          color="#00BFFF"
+          height={500}
+          width={500}
+        />
+      );
+    }
 
-    if (!this.token) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       // alert('Please login first');
       return (<Redirect to="/" />);
     }
 
+    const { appointments } = this.state;
     return (
       <div className={appClasses.mainDiv}>
         <div className={appClasses.bgImage} />
@@ -66,6 +79,18 @@ export class AppointmentList extends Component {
 
 const mapStateToProps = state => ({
   authToken: state.auth.authToken,
+  appointments: state.appt.list,
+  fetching: state.appt.fetching,
 });
 
-export default connect(mapStateToProps)(AppointmentList);
+const mapDispatchToProps = dispatch => ({
+  apptCall: token => dispatch(apptCall(token)),
+});
+
+AppointmentList.propTypes = {
+  apptCall: PropTypes.func.isRequired,
+  fetching: PropTypes.bool.isRequired,
+  appointments: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppointmentList);
