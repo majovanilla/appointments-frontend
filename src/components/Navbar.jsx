@@ -33,10 +33,6 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const validToken = checkToken();
-    if (validToken === false) {
-      return (<div />);
-    }
     const { visible } = this.state;
     const visibleClass = visible ? navClasses.navToggle__visible : navClasses.navToggle__invisible;
 
