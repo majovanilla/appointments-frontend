@@ -32,7 +32,7 @@ export class AppointmentList extends Component {
   }
 
   render() {
-    const { fetching, tutors } = this.props;
+    const { fetching } = this.props;
     if (fetching === true) {
       return (
         <Loader
@@ -40,14 +40,13 @@ export class AppointmentList extends Component {
           type="Circles"
           color="#00BFFF"
           height={500}
-          width={500}
+          width={200}
         />
       );
     }
 
     const validToken = checkToken();
     if (!validToken) {
-      // alert('Please login first');
       return (<Redirect to="/" />);
     }
 
