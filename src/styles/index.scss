@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@700&family=Open+Sans:wght@400;700;800&display=swap');
+@import 'reset';
+@import 'variables';
+
+.App {
+  height: 100vh;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}

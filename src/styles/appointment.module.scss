@@ -1,0 +1,95 @@
+@import 'variables';
+
+.mainDiv {
+  position: relative;
+  height: 100%;
+  background: $green-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $white-title-color;
+}
+
+.mainTitle {
+  z-index: 1;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: url(https://images.unsplash.com/photo-1522111608460-19e7331e00fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) 0 / cover no-repeat;
+  opacity: 0.2;
+}
+
+.link {
+  z-index: 1;
+  text-decoration: none;
+}
+
+.divisor {
+  z-index: 1;
+  border-bottom: 2px solid;
+  width: 50%;
+  opacity: 40%;
+  margin: 20px;
+  justify-content: space-evenly;
+}
+
+.textDiv {
+  z-index: 1;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.buttons {
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 55%;
+  margin-top: 40px;
+}
+
+select,
+.datePicker,
+.bookButton {
+  font-weight: bold;
+  padding: 20px 25px;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+.bookButton {
+  z-index: 1;
+  width: 150px;
+  background: white;
+  text-align: center;
+  color: $green-color;
+  border-style: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.input {
+  color: white;
+  width: 230px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  appearance: none;
+  background: $green-color url(../img/triangle.png) no-repeat 90% / 20px;
+
+  &__small {
+    width: 100px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

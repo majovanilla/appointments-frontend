@@ -1,0 +1,15 @@
+@import 'variables';
+
+.home {
+  height: 100%;
+  background: $yellow-color;
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: url(https://miro.medium.com/proxy/1*4MZn5b3-tI2-SCROwHuBjQ.png) 60% bottom no-repeat;
+  z-index: 1;
+}

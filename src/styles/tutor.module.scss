@@ -1,0 +1,62 @@
+@import 'variables';
+
+.mainDiv {
+  display: grid;
+  grid-template-columns: [space1] 5% [image] 50% [details] 35% [space2] 5%;
+  grid-template-rows: [space2] auto [main] 70% [space1] auto;
+  height: 100%;
+}
+
+.tutorImgDiv {
+  grid-column: image;
+  grid-row: main;
+  overflow: hidden;
+}
+
+.tutorImg {
+  width: 100%;
+}
+
+.tutorInfoDiv {
+  grid-column: details;
+  grid-row: main;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.tutorName {
+  text-align: right;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.tutorInfo {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+
+  &__gray {
+    background-color: $gray-color;
+  }
+
+  &__title {
+    padding: 0;
+  }
+}
+
+.appointmentButton {
+  grid-column: main;
+  width: 60%;
+  background: $green-color;
+  align-self: flex-end;
+  padding: 20px;
+  border: $white-title-color 3px solid;
+  border-radius: 120px;
+  text-align: center;
+  color: $white-title-color;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
